@@ -9,5 +9,4 @@
 
 4.执行 gulp 构建开发项目
 
-
-5.开发完成  单入口项目 可使用 jspm bundle source/bootstrap --minify 打包所有依赖
+5.开发完成后 单入口项目 可使用 jspm bundle source/app --minify 打包所有依赖(包括CSS)
