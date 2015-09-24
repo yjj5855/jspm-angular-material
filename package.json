@@ -1,0 +1,25 @@
+{
+  "jspm": {
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.6",
+      "angular-material": "npm:angular-material@^0.11.0",
+      "angular-route": "github:angular/bower-angular-route@^1.4.6",
+      "angular-ui-router": "github:angular-ui/ui-router@^0.2.15",
+      "bootstrap": "github:twbs/bootstrap@^3.3.5",
+      "css": "github:systemjs/plugin-css@^0.1.17",
+      "jquery": "npm:jquery@^2.1.4",
+      "mdi": "npm:mdi@^1.2.65",
+      "text": "github:systemjs/plugin-text@^0.0.2"
+    },
+    "devDependencies": {
+      "babel": "npm:babel-core@^5.8.24",
+      "babel-runtime": "npm:babel-runtime@^5.8.24",
+      "core-js": "npm:core-js@^1.1.4"
+    }
+  },
+  "devDependencies": {
+    "browser-sync": "^2.9.6",
+    "gulp": "^3.9.0",
+    "js-yaml": "^3.4.2"
+  }
+}
