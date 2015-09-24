@@ -3,6 +3,10 @@
  */
 
 import 'angular';
+import 'angular-material';
+import 'angular-material/angular-material.css!';
+import 'mdi/css/materialdesignicons.css!'
+import '../public/css/app.css!'
 
 
 
