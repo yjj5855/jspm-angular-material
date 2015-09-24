@@ -1,0 +1,15 @@
+@import "color.css";
+.site-content-toolbar {
+    background: #f6f6f6 !important;
+    color: #202020 !important;
+    z-index: 3;
+}
+
+.dis-block{
+    display: block;
+}
+
+.lh-36{
+    height: 36px;
+    line-height: 36px;
+}

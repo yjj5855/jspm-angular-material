@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="myApp" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../jspm_packages/system.js"></script>
+    <script src="../config.js"></script>
+    <script>
+        System.import("source/app");
+    </script>
+</head>
+
+<body layout="row">
+    <!--左侧栏-->
+    <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">
+                <a ng-href="#/">Angular Material</a>
+            </h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-button ng-click="close()" class="md-primary" hide-gt-md>
+                Close Sidenav Left
+            </md-button>
+            <a class="md-primary  dis-block lh-36" ng-href="#/home">Home</a>
+
+            <a class="md-primary  dis-block lh-36" ng-href="#/">Index</a>
+
+        </md-content>
+    </md-sidenav>
+    <div layout="column" flex>
+        <md-toolbar class="site-content-toolbar"></md-toolbar>
+
+        <md-content ng-view md-scroll-y></md-content>
+    </div>
+</body>
+</html>
