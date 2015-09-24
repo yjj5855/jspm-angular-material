@@ -4,3 +4,5 @@
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml
+jspm_packages
+node_modules
