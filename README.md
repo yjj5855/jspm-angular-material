@@ -1,7 +1,7 @@
 # jspm-angular-material
 使用jspm 快速构建 Material Design 设计模式的 angular 应用
 
-1.先安装jspm
+1.执行 npm install jspm -g  全局安装jspm
 
 2.执行 jspm install 安装依赖包
 
