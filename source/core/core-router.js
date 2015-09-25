@@ -1,11 +1,11 @@
 /**
  * Created by yangjiajun on 15/9/24.
  */
-import HomeRouter from 'source/states/home/home-route'
+import HomeRoute from 'source/states/home/home-route'
 
 function CoreRouter($routeProvider) {
     $routeProvider
-        .when('/home',HomeRouter)
+        .when('/home',HomeRoute)
 
         .otherwise({redirectTo: '/'});
 }
