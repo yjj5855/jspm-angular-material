@@ -9,6 +9,7 @@ browserSync: &browserSync
   server:
     baseDir: "public"
     routes:
+      "/public": "./public/"
       "/build.js": "./build.js"
       "/config.js": "./config.js"
       "/jspm_packages": "./jspm_packages/"

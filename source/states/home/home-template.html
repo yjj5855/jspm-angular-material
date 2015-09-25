@@ -37,3 +37,10 @@
         </div>
     </div>
 </md-content>
+<md-content class="md-padding">
+    <div ng-repeat="qa in qa_list.list">
+        <div ng-bind="qa.id"></div>
+        <input ng-model="qa.name">
+    </div>
+</md-content>
+
