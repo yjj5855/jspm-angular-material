@@ -47,11 +47,14 @@
     </md-content>
 
     <!-- 底部输入框-->
-    <md-content class="md-padding" layout="row" style="height: 54px;overflow: hidden;position: relative">
-        <md-input-container md-no-float flex style="padding:2px 54px 2px 10px!important;">
-            <input ng-model="message" type="text">
-        </md-input-container>
-        <md-button class="md-icon-button" style="position: absolute;right: 0px;bottom: 0px;">
+    <md-content layout="row" style="overflow: hidden;position: relative;">
+        <div class="md-padding" flex>
+            <md-input-container md-no-float flex style="padding: 2px 48px 2px 10px!important;">
+                <input  ng-model="message" type="text">
+            </md-input-container>
+        </div>
+
+        <md-button class="md-icon-button" style="position: absolute;right: 0px;">
             <md-icon class="mdi mdi-24px mdi-send c-green" class="name"></md-icon>
         </md-button>
     </md-content>
