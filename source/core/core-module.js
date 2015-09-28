@@ -7,6 +7,8 @@ import '../service/ApiConfig'
 import '../env'
 
 import HomeModule from 'source/states/home/home-module'
+import IndexModule from 'source/states/index/index-module'
+import ChatModule from 'source/states/chat/chat-module'
 
 import CoreRouter from 'source/core/core-router'
 
@@ -18,6 +20,9 @@ export default angular.module('myApp',[
     'env',
     'apiConfig',
     'Qa',
-    HomeModule.name
+    IndexModule.name,
+    HomeModule.name,
+    ChatModule.name
+
 ])
     .config(CoreRouter)

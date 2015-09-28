@@ -1,0 +1,62 @@
+<md-toolbar class="md-theme-blue bg-green">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" ng-click="back()" aria-label="Back">
+            <md-icon class="mdi mdi-24px mdi-arrow-left"></md-icon>
+        </md-button>
+        <h2>
+            <span ng-bind="service_info.name"></span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Favorite">
+            <md-icon class="mdi mdi-24px mdi-account"></md-icon>
+        </md-button>
+    </div>
+</md-toolbar>
+<md-content layout="column" flex>
+    <md-content flex md-scroll-y class="bg-gray">
+
+        <div class="direct-chat-messages">
+            <div ng-repeat="msg in msg_list">
+                    <!-- 客服的气泡-->
+                    <div class="direct-chat-msg" ng-if="msg.from == 1">
+                        <div class="direct-chat-info clearfix" >
+                            <span class="direct-chat-timestamp" >{{msg.created_at}}</span>
+                            <p class="direct-chat-name">{{msg.admin_name}}</p>
+                        </div>
+
+                        <img class="direct-chat-img" ng-src="{{service_info.avatar}}" alt="message user image">
+                        <div class="direct-chat-text">
+                            {{msg.content}}
+                        </div>
+                    </div>
+
+                    <!-- 用户的气泡-->
+                    <div class="direct-chat-msg right" ng-if="msg.from == 0">
+                        <div class="direct-chat-info clearfix" >
+                            <span class="direct-chat-timestamp" >{{msg.created_at}}</span>
+                            <p class="direct-chat-name right">{{msg.user_nickname}}</p>
+                        </div>
+                        <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
+                        <div class="direct-chat-text">
+                            {{msg.content}}
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+    </md-content>
+
+    <!-- 底部输入框-->
+    <md-content class="md-padding" layout="row">
+        <md-input-container flex style="padding:2px 0px 2px 10px!important;">
+            <input ng-model="message" type="text" style="height: 54px;">
+        </md-input-container>
+        <md-button class="md-icon-button" style="margin-right: 0!important;margin-bottom: 0!important;">
+            <md-icon class="mdi mdi-24px mdi-send c-green" class="name"></md-icon>
+        </md-button>
+    </md-content>
+
+</md-content>
+
+
+
