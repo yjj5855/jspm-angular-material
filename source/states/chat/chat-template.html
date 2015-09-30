@@ -1,13 +1,13 @@
 <md-toolbar class="md-theme-indigo bg-green">
     <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" ng-click="back()" aria-label="Back">
+        <md-button class="md-icon-button" ng-click="back()">
             <md-icon class="mdi mdi-24px mdi-arrow-left"></md-icon>
         </md-button>
         <h2>
             <span ng-bind="service_info.name"></span>
         </h2>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="Favorite">
+        <md-button class="md-icon-button" ng-click="toggleRight()">
             <md-icon class="mdi mdi-24px mdi-account"></md-icon>
         </md-button>
     </div>
@@ -61,5 +61,37 @@
 
 </md-content>
 
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+    <md-toolbar class="md-theme-light bg-green">
+        <h1 class="md-toolbar-tools">{{service_info.name}}的资料</h1>
+    </md-toolbar>
+    <md-content  layout-padding layout-align="center center">
+        <div style="text-align: center;">
+            <image ng-src="{{service_info.avatar}}" height="100px"/>
+        </div>
 
+        <form>
+            <md-input-container>
+                <label for="service_infoName">姓名</label>
+                <input type="text" id="service_infoName"
+                       ng-model="service_info.name" readonly>
+            </md-input-container>
+            <md-input-container>
+                <label for="service_infoLLL">专精车系</label>
+                <input type="text" id="service_infoLLL"
+                       value="德系" readonly>
+            </md-input-container>
+            <md-input-container>
+                <label for="service_infoNNN">专精领域</label>
+                <input type="text" id="service_infoNNN"
+                       value="维修，保养" readonly>
+            </md-input-container>
+            <md-input-container>
+                <label for="service_infoMMM">维修资历</label>
+                <input type="text" id="service_infoMMM"
+                       value="12年" readonly>
+            </md-input-container>
+        </form>
+    </md-content>
+</md-sidenav>
 

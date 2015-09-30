@@ -7,12 +7,19 @@ import './index-value'
 class IndexCtrl{
     constructor($location,$scope,value,$timeout,$rootScope){
         $scope.chatStatus = value.chatStatus?value.chatStatus = !value.chatStatus:'';
-        $scope.openChatRoute = function(){
+        $scope.openChatRoute = openChatRoute;
+
+
+        /**
+         * function
+         */
+
+        function openChatRoute(){
             value.chatStatus = !value.chatStatus;
             $scope.chatStatus = !$scope.chatStatus;
             $timeout(()=>{
                 $location.path('/chat');
-            },1000)
+            },800)
         }
     }
 
