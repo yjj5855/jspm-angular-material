@@ -38,6 +38,10 @@
     </div>
 </md-content>
 <md-content class="md-padding">
+
+    <!-- 加载 -->
+    <md-progress-circular class="md-accent md-hue-1" md-mode="" md-diameter="60">
+    </md-progress-circular>
     <div ng-repeat="qa in qa_list.list">
         <div ng-bind="qa.id"></div>
         <input ng-model="qa.name">

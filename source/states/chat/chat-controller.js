@@ -3,15 +3,29 @@
  */
 
 import './chat-value'
+import SendOtherMessageHtml from './bottom_sheet/send-other-message-template.html!text'
+import SendOtherMessageCtrl from './bottom_sheet/send-other-message-controller';
+
+//表情控件
+import CmFace from 'source/components/face/face-directive'
 
 export default angular.module('chat')
-    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$log',
-        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$log){
+    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log',
+        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log){
+            $scope.open_face_status = value.open_face_status;
+            $scope.message = value.message;
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
             $scope.user_info = value.user_info;
             $scope.back = back;
             $scope.toggleRight = buildToggler('right');
+            $scope.showGridBottomSheet = showGridBottomSheet;
+
+            /**
+             * 监听表情输入
+             */
+            $scope.$on('face_inputting',face_inputting);
+            bindMessageInput();
             /////////////////////////////////////////////
             function back(){
                 $window.history.back()
@@ -30,6 +44,51 @@ export default angular.module('chat')
                         });
                 },200);
                 return debounceFn;
+            }
+
+            /**
+             * 显示底部框
+             * @param $event
+             * @param type
+             */
+            function showGridBottomSheet($event,type){
+                if(type=='face'){
+                    $mdBottomSheet.show({
+                        template: SendFaceHtml,
+                        controller: 'SendFaceCtrl',
+                        targetEvent: $event
+                    }).then(function(clickedItem) {
+                        alert(clickedItem.name);
+                    });
+                }else{
+                    $mdBottomSheet.show({
+                        template: SendOtherMessageHtml,
+                        controller: 'SendOtherMessageCtrl',
+                        targetEvent: $event
+                    }).then(function(clickedItem) {
+                        $scope.open_face_status = value.open_face_status = true;
+                    });
+                }
+            }
+
+            /**
+             * 消息框 获取焦点后 表情框消失 给手机输入框留空间
+             */
+            function bindMessageInput(){
+                angular.element(document.getElementById('message_input')).on('focus',function(){
+                    value.open_face_status = false;
+                    $rootScope.$apply('open_face_status');
+                })
+            }
+
+            /**
+             * 监听表情输入
+             * @param event
+             * @param msg
+             */
+            function face_inputting(event,msg){
+                value.message.content += msg;
+                $rootScope.$apply('message.content');
             }
         }]
     )

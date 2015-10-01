@@ -22,7 +22,6 @@ export default angular.module('myApp',[
     'Qa',
     IndexModule.name,
     HomeModule.name,
-    ChatModule.name
-
+    ChatModule.name,
 ])
     .config(CoreRouter)

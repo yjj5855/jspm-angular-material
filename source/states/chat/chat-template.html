@@ -50,15 +50,25 @@
     <md-content layout="row" style="overflow: hidden;position: relative;">
         <div class="md-padding" flex>
             <md-input-container md-no-float flex style="padding: 2px 48px 2px 10px!important;">
-                <input  ng-model="message" type="text">
+                <input ng-model="message.content" type="text" id="message_input">
             </md-input-container>
         </div>
 
-        <md-button class="md-icon-button" style="position: absolute;right: 0px;">
+        <!-- 发送按钮-->
+        <md-button class="md-icon-button" style="position: absolute;right: 0px;" ng-if="message.content !=''">
             <md-icon class="mdi mdi-24px mdi-send c-green" class="name"></md-icon>
+        </md-button>
+
+        <!-- +号按钮-->
+        <md-button class="md-icon-button" style="position: absolute;right: 0px;" ng-if="message.content ==''"
+                ng-click="showGridBottomSheet($event)">
+            <md-icon class="mdi mdi-24px mdi-plus-circle-outline c-green" class="name"></md-icon>
         </md-button>
     </md-content>
 
+    <face class="h-200" ng-show="open_face_status==true">
+
+    </face>
 </md-content>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">

@@ -3,6 +3,12 @@
  */
 
 var chatValue = {
+    //type 1=文本 | 2=声音 | 3=图片
+    message     :   {
+        content :   '',
+        type    :   1
+    },
+    open_face_status:false,
     user_info   :   {
         name    :   'user',
         avatar  :   'public/img/default_user.jpg'

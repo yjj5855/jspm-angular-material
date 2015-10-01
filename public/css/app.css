@@ -287,3 +287,7 @@ body{
     right: 10px;
 }
 /**/
+
+.mdi.mdi-48px{
+    height: 48px;
+}
