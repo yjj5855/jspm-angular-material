@@ -21,9 +21,7 @@ export default angular.module('chat')
             $scope.toggleRight = buildToggler('right');
             $scope.showGridBottomSheet = showGridBottomSheet;
 
-            /**
-             * 监听表情输入
-             */
+
             $scope.$on('face_inputting',face_inputting);
             bindMessageInput();
             /////////////////////////////////////////////
@@ -66,6 +64,7 @@ export default angular.module('chat')
                         controller: 'SendOtherMessageCtrl',
                         targetEvent: $event
                     }).then(function(clickedItem) {
+                        //showGridBottomSheet('','face');
                         $scope.open_face_status = value.open_face_status = true;
                     });
                 }
@@ -76,7 +75,7 @@ export default angular.module('chat')
              */
             function bindMessageInput(){
                 angular.element(document.getElementById('message_input')).on('focus',function(){
-                    value.open_face_status = false;
+                    $scope.open_face_status = value.open_face_status = false;
                     $rootScope.$apply('open_face_status');
                 })
             }
@@ -87,8 +86,7 @@ export default angular.module('chat')
              * @param msg
              */
             function face_inputting(event,msg){
-                value.message.content += msg;
-                $rootScope.$apply('message.content');
+                $scope.message.content = value.message.content += msg;
             }
         }]
     )
