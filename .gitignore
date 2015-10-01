@@ -1,12 +1,5 @@
-.idea/.name
-.idea/jspm-angular-material.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/vcs.xml
-.idea/workspace.xml
+.idea
 jspm_packages
 node_modules
 build.js
 build.js.map
-.idea/jsLibraryMappings.xml
-.idea/watcherTasks.xml
