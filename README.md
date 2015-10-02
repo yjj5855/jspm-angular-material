@@ -9,4 +9,6 @@
 
 4.执行 gulp 构建开发项目
 
-5.开发完成后 单入口项目 可使用 jspm bundle source/app --minify 打包所有依赖(包括CSS)
+5.开发完成后 单入口项目 可使用 jspm bundle source/app --inject --minify 打包所有依赖(包括CSS)
+
+6.jspm unbundle 不使用用打包合并的js

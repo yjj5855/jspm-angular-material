@@ -3,7 +3,7 @@
  */
 
 export default angular.module('chat')
-    .controller('SendOtherMessageCtrl', function($scope, $mdBottomSheet) {
+    .controller('SendOtherMessageCtrl',['$scope','$mdBottomSheet',function($scope, $mdBottomSheet) {
         $scope.items = [
             { name: '表情', type: 1 , icon: 'emoticon' },
             { name: '图片', type: 3 , icon: 'file-image-box' },
@@ -13,4 +13,4 @@ export default angular.module('chat')
             var clickedItem = $scope.items[$index];
             $mdBottomSheet.hide(clickedItem);
         };
-    })
+    }])
