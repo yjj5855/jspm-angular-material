@@ -4,19 +4,6 @@
 
 import FaceTemplate from './face-template.html!text'
 
-//export default function(){
-//    return {
-//        restrict    :   'E',
-//        replace: true,
-//        template    :   function(element,attrs){
-//            //var html = `
-//            //    <div class="{{attrs.class}}"></div>
-//            //`;
-//            return FaceTemplate;
-//        }
-//    }
-//}
-
 export default angular.module('chat')
     .directive('face',['$rootScope',function($rootScope){
         return {
