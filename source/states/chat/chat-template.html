@@ -54,6 +54,11 @@
             </md-input-container>
         </div>
 
+        <!-- 表情按钮-->
+        <md-button class="md-icon-button" style="position: absolute;right: 48px;" ng-click="open_face_status = !open_face_status">
+            <md-icon class="mdi mdi-24px mdi-emoticon c-green" class="name"></md-icon>
+        </md-button>
+
         <!-- 发送按钮-->
         <md-button class="md-icon-button" style="position: absolute;right: 0px;" ng-if="message.content !=''">
             <md-icon class="mdi mdi-24px mdi-send c-green" class="name"></md-icon>
