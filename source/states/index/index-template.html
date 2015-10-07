@@ -1,27 +1,16 @@
 <div>
-<md-toolbar class="md-theme-indigo bg-blue-500">
+<md-toolbar class="md-default-theme">
     <div class="md-toolbar-tools">
-        <!--<md-button class="md-icon-button" aria-label="Settings">-->
-            <!--<md-icon class="mdi mdi-24px mdi-more"></md-icon>-->
-        <!--</md-button>-->
         <h2>
             <span>Logo</span>
         </h2>
         <span flex></span>
-        <!--<md-button class="md-icon-button" aria-label="Favorite">-->
-            <!--<md-icon md-svg-icon="img/icons/favorite.svg" style="color: greenyellow;"></md-icon>-->
-        <!--</md-button>-->
-        <!--<md-button class="md-icon-button" aria-label="More">-->
-            <!--<md-icon md-svg-icon="img/icons/more_vert.svg"></md-icon>-->
-        <!--</md-button>-->
+    </div>
+    <div layout="row" layout-align="center center" flex>
+        <h2 class="md-headline">车打不着火，怎么办</h2>
     </div>
 </md-toolbar>
-<md-content class="">
-    <div layout="row" layout-align="center center" class="bg-blue-500" flex style="position: relative">
-        <h2 class="md-headline c-white">车打不着火，怎么办</h2>
-    </div>
-</md-content>
-<md-button class="md-fab cm-fab-btn bg-green" ng-class="{'active':chatStatus}" aria-label="提问技师" ng-click="openChatRoute()">
+<md-button class="md-fab cm-fab-btn md-accent" ng-class="{'active':chatStatus}" ng-click="openChatRoute()" aria-label="咨询技师">
     <md-icon class="mdi mdi-24px mdi-message-text" ng-if="chatStatus==false"></md-icon>
 </md-button>
 </div>

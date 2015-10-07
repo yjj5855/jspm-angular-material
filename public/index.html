@@ -17,7 +17,7 @@
 <body layout="row">
     <!--左侧栏-->
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
-        <md-toolbar class="md-theme-indigo">
+        <md-toolbar class="md-primary">
             <h1 class="md-toolbar-tools">
                 <a ng-href="#/">Angular Material</a>
             </h1>
@@ -26,10 +26,11 @@
             <md-button ng-click="close()" class="md-primary" hide-gt-md>
                 Close Sidenav Left
             </md-button>
-            <a class="md-primary  dis-block lh-36" ng-href="#/home">Home</a>
 
             <a class="md-primary  dis-block lh-36" ng-href="#/">Index</a>
-
+            <a class="md-primary  dis-block lh-36" ng-href="#/home">Home</a>
+            <a class="md-primary  dis-block lh-36" ng-href="#/chat">Chat</a>
+            <a class="md-primary  dis-block lh-36" ng-href="#/theme">Theme</a>
         </md-content>
     </md-sidenav>
     <div layout="column" flex ng-view md-scroll-y>

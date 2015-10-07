@@ -41,10 +41,10 @@ body{
     0%{-webkit-transform:scale(1)}
     100%{-webkit-transform:scale(50)}
 }
-/*@-moz-keyframes tobig{*/
-    /*0%{-moz-transform:scale(1)}*/
-    /*100%{-moz-transform:scale(50)}*/
-/*}*/
+@-moz-keyframes tobig{
+    0%{-moz-transform:scale(1)}
+    100%{-moz-transform:scale(50)}
+}
 
 /*聊天框CSS*/
 /*

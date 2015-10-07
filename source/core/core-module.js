@@ -11,6 +11,7 @@ import IndexModule from 'source/states/index/index-module'
 import ChatModule from 'source/states/chat/chat-module'
 
 import CoreRouter from 'source/core/core-router'
+import CoreTheme  from 'source/core/core-theme'
 
 export default angular.module('myApp',[
     'ngRoute',
@@ -25,3 +26,4 @@ export default angular.module('myApp',[
     ChatModule.name,
 ])
     .config(CoreRouter)
+    .config(CoreTheme)
