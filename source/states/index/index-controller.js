@@ -3,12 +3,13 @@
  */
 
 import './index-value'
+import 'source/components/menu_left/menu-left-directive'
 
 class IndexCtrl{
-    constructor($location,$scope,value,$timeout,$rootScope){
+    constructor($location,$scope,value,$timeout,$rootScope,$mdUtil,$mdSidenav,$log){
         $scope.chatStatus = value.chatStatus?value.chatStatus = !value.chatStatus:'';
         $scope.openChatRoute = openChatRoute;
-
+        $scope.toggleLeft = buildToggler('left');
 
         /**
          * function
@@ -21,10 +22,25 @@ class IndexCtrl{
                 $location.path('/chat');
             },800)
         }
+
+        /**
+         * Build handler to open/close a SideNav; when animation finishes
+         * report completion in console
+         */
+        function buildToggler(navID) {
+            var debounceFn =  $mdUtil.debounce(function(){
+                $mdSidenav(navID)
+                    .toggle()
+                    .then(function () {
+                        $log.debug("toggle " + navID + " is done");
+                    });
+            },200);
+            return debounceFn;
+        }
     }
 
 }
 
-IndexCtrl.$inject = ['$location','$scope','index.value','$timeout','$rootScope'];
+IndexCtrl.$inject = ['$location','$scope','index.value','$timeout','$rootScope','$mdUtil','$mdSidenav','$log'];
 
 export default IndexCtrl;

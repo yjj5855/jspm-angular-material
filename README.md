@@ -1,7 +1,7 @@
 # jspm-angular-material
 使用jspm 快速构建 Material Design 设计模式的 angular 应用
 
-demo : <a href="http://182.92.99.230:3000">http://182.92.99.230:3000</a>
+demo : <a href="http://182.92.99.230">http://182.92.99.230</a>
 
 1.执行 npm install jspm -g  全局安装jspm
 
