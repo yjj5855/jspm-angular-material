@@ -10,10 +10,10 @@ import 'public/css/app.css!'
 
 
 
-import CoreModule from './core/core-module'
+import AppModule from './core/core-module'
 
 //angular.element(document).ready(
 //    () => angular.bootstrap(document, [CoreModule.name], { strictDi: true })
 //)
 
-export default CoreModule
+export default AppModule

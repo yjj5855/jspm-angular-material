@@ -9,6 +9,9 @@ import SendOtherMessageCtrl from './bottom_sheet/send-other-message-controller';
 //表情控件
 import CmFace from 'source/components/face/face-directive'
 
+//返回按钮指令
+import 'source/components/btn_back/btn-back-directive'
+
 export default angular.module('chat')
     .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log',
         function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log){
@@ -17,7 +20,6 @@ export default angular.module('chat')
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
             $scope.user_info = value.user_info;
-            $scope.back = back;
             $scope.toggleRight = buildToggler('right');
             $scope.showGridBottomSheet = showGridBottomSheet;
 
@@ -25,10 +27,6 @@ export default angular.module('chat')
             $scope.$on('face_inputting',face_inputting);
             bindMessageInput();
             /////////////////////////////////////////////
-            function back(){
-                $window.history.back()
-            }
-
             /**
              * Build handler to open/close a SideNav; when animation finishes
              * report completion in console

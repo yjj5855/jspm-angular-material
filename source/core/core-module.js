@@ -9,11 +9,13 @@ import '../env'
 import HomeModule from 'source/states/home/home-module'
 import IndexModule from 'source/states/index/index-module'
 import ChatModule from 'source/states/chat/chat-module'
+import ThemeModule from 'source/states/theme/theme-module'
 
 import CoreRouter from 'source/core/core-router'
 import CoreTheme  from 'source/core/core-theme'
 
-export default angular.module('myApp',[
+
+var CoreModule = angular.module('myApp',[
     'ngRoute',
     'ngMaterial',
     'ngResource',
@@ -24,6 +26,9 @@ export default angular.module('myApp',[
     IndexModule.name,
     HomeModule.name,
     ChatModule.name,
+    ThemeModule.name,
 ])
     .config(CoreRouter)
-    .config(CoreTheme)
+    .config(CoreTheme);
+
+export default CoreModule

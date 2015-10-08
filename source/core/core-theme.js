@@ -4,6 +4,7 @@
 
 
 function CoreTheme($mdThemingProvider) {
+
     $mdThemingProvider.theme('default')
         .primaryPalette('blue',{
             'default'   :   '500',
@@ -19,7 +20,8 @@ function CoreTheme($mdThemingProvider) {
         })
         .warnPalette('deep-orange',{
             'default'   :   '500',
-        })
+        });
+    $mdThemingProvider.alwaysWatchTheme(true)
 }
 
 CoreTheme.$inject = ['$mdThemingProvider'];
