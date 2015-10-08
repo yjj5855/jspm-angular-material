@@ -1,8 +1,7 @@
 <div>
-    <menu-left></menu-left>
     <md-toolbar class="md-default-theme">
         <div class="md-toolbar-tools">
-            <md-button class="md-icon-button" aria-label="菜单" ng-click="toggleLeft()">
+            <md-button class="md-icon-button" aria-label="菜单" menu-left-btn>
                 <md-icon class="mdi mdi-24px mdi-menu"></md-icon>
             </md-button>
             <h2><span>Logo</span></h2>
@@ -16,4 +15,6 @@
         <md-icon class="mdi mdi-24px mdi-message-text" ng-if="chatStatus==false"></md-icon>
     </md-button>
 </div>
+<!--侧栏-左-->
+<menu-left></menu-left>
 
