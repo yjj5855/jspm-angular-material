@@ -13,8 +13,8 @@ import CmFace from 'source/components/face/face-directive'
 import 'source/components/btn_back/btn-back-directive'
 
 export default angular.module('chat')
-    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log',
-        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log){
+    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$location', '$anchorScroll',
+        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log,$location,$anchorScroll){
             $scope.open_face_status = value.open_face_status;
             $scope.message = value.message;
             $scope.msg_list = value.msg_list;
@@ -22,8 +22,10 @@ export default angular.module('chat')
             $scope.user_info = value.user_info;
             $scope.toggleRight = buildToggler('right');
             $scope.showGridBottomSheet = showGridBottomSheet;
-
-
+            $scope.gotoBottom = gotoBottom;
+            /**
+             * 监听表情控件的输入表情事件
+             */
             $scope.$on('face_inputting',face_inputting);
             bindMessageInput();
             /////////////////////////////////////////////
@@ -75,7 +77,7 @@ export default angular.module('chat')
                 angular.element(document.getElementById('message_input')).on('focus',function(){
                     $scope.open_face_status = value.open_face_status = false;
                     $rootScope.$apply('open_face_status');
-                })
+                });
             }
 
             /**
@@ -85,6 +87,14 @@ export default angular.module('chat')
              */
             function face_inputting(event,msg){
                 $scope.message.content = value.message.content += msg;
+            }
+
+            /**
+             * 滚到底部
+             */
+            function gotoBottom(){
+                $location.hash('chat_bottom');
+                $anchorScroll();
             }
         }]
     )

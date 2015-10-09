@@ -1,28 +1,13 @@
 
 import 'source/components/btn_back/btn-back-directive'
 
+/**
+ * 目前还不能动态 修改主题
+ * 只能通过修改material源码的方式实现
+ */
 class ThemeCtrl{
     constructor($scope,$rootScope){
-        //$scope.themes = [
-        //    {
-        //        name:'主色:蓝|次色:绿|警告色:橙',
-        //        primary:'blue',
-        //        primarySetting:{
-        //            'default'   :   '500',
-        //            'hue-1'     :   '900',
-        //            'hue-2'     :   'A100',
-        //            'hue-3'     :   '400'
-        //        }
-        //    }
-        //];
-
-
-        $scope.changeTheme = changeTheme;
-
-
-        function changeTheme(theme_name){
-        
-        }
+        $rootScope.app_theme = 'default';
     }
 }
 
