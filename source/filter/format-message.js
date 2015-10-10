@@ -61,7 +61,7 @@ angular.module('format_msg',[])
                             return '<br/>';
                         });
                         text = text.replace(/\[.+?\]/g,function(a,b){
-                            return  `<image src="img/face/${face_list[a]}" height="30px"/>`;
+                            return  '<image src="img/face/'+face_list[a]+'" height="30px"/>';
                         });
                         text = text.replace(/<\(.+?\)>/g,function(a,b){
                             if(a.length>4){
