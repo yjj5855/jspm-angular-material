@@ -13,7 +13,7 @@
     </div>
 </md-toolbar>
 <md-content layout="column">
-    <md-content flex md-scroll-y class="bg-gray">
+    <md-content flex md-scroll-y class="bg-gray"  id="message_box">
 
         <div class="direct-chat-messages">
             <div ng-repeat="msg in msg_list">
@@ -25,8 +25,8 @@
                         </div>
 
                         <img class="direct-chat-img" ng-src="{{service_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text">
-                            {{msg.content}}
+                        <div class="direct-chat-text" ng-bind-html="msg.content|format_msg:msg.type">
+
                         </div>
                     </div>
 
@@ -37,12 +37,11 @@
                             <p class="direct-chat-name right">{{msg.user_nickname}}</p>
                         </div>
                         <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text">
-                            {{msg.content}}
+                        <div class="direct-chat-text" ng-bind-html="msg.content|format_msg:msg.type">
+
                         </div>
                     </div>
             </div>
-            <div id="chat_bottom"></div>
         </div>
 
     </md-content>
@@ -51,7 +50,7 @@
     <md-content layout="row" style="min-height: 48px;">
 
         <md-input-container flex class="md-padding">
-            <input ng-model="message.content" type="text" id="message_input"  aria-label="聊天文字">
+            <input ng-model="message.content" type="text" id="message_input" ng-focus="open_face_status=false" aria-label="聊天文字">
         </md-input-container>
 
         <!-- 表情按钮-->
@@ -60,7 +59,7 @@
         </md-button>
 
         <!-- 发送按钮-->
-        <md-button class="md-icon-button" ng-class="{'md-accent':message.content.trim()!=''}" style="" ng-if="message.content !=''" aria-label="发送信息">
+        <md-button class="md-icon-button" ng-click="sendMessage()"  ng-class="{'md-accent':message.content.trim()!=''}" style="" ng-if="message.content !=''" aria-label="发送信息">
             <md-icon class="mdi mdi-24px mdi-send" class="name"></md-icon>
         </md-button>
 

@@ -5,6 +5,7 @@ import 'angular-route';
 import 'angular-resource'
 import '../service/ApiConfig'
 import '../env'
+import 'source/filter/format-message'
 
 import HomeModule from 'source/states/home/home-module'
 import IndexModule from 'source/states/index/index-module'
@@ -21,8 +22,8 @@ var CoreModule = angular.module('myApp',[
     'ngResource',
 
     'env',
-    'apiConfig',
-    'Qa',
+    'apiConfig','Qa',
+    'format_msg',
     IndexModule.name,
     HomeModule.name,
     ChatModule.name,
