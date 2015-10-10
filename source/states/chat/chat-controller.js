@@ -12,11 +12,14 @@ import 'source/filter/format-message'
 import CmFace from 'source/components/face/face-directive'
 //返回按钮指令
 import 'source/components/btn_back/btn-back-directive'
+//语音按钮指令
+import 'source/components/btn_audio/btn-audio-directive'
 
 export default angular.module('chat')
     .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$filter',
         function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log,$filter){
             $scope.open_face_status = value.open_face_status;
+            $scope.open_audio_status = value.open_audio_status;
             $scope.message = value.message;
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
@@ -32,6 +35,15 @@ export default angular.module('chat')
              * 监听表情控件的输入表情事件
              */
             $scope.$on('face_inputting',face_inputting);
+            /**
+             * 监听语音输入
+             */
+            $scope.$on('audio_inputting',audio_inputting);
+
+            function audio_inputting(event,audio_url){
+
+                $scope.sendMessage(audio_url,2);
+            }
 
             /**
              * 根据md-component-id的值来显示或者隐藏侧栏
@@ -72,30 +84,21 @@ export default angular.module('chat')
              * @param type
              */
             function showGridBottomSheet($event,type){
-                if(type=='face'){
-                    $mdBottomSheet.show({
-                        template: SendFaceHtml,
-                        controller: 'SendFaceCtrl',
-                        targetEvent: $event
-                    }).then(function(clickedItem) {
-                        alert(clickedItem.name);
-                    });
-                }else{
-                    $mdBottomSheet.show({
-                        template: SendOtherMessageHtml,
-                        controller: 'SendOtherMessageCtrl',
-                        targetEvent: $event
-                    }).then(function(clickedItem) {
-                        //showGridBottomSheet('','face');
-                        $scope.open_face_status = value.open_face_status = true;
-                    });
-                }
+                $mdBottomSheet.show({
+                    template: SendOtherMessageHtml,
+                    controller: 'SendOtherMessageCtrl',
+                    targetEvent: $event
+                }).then(function(clickedItem) {
+
+                    //showGridBottomSheet('','face');
+                    //$scope.open_face_status = value.open_face_status = true;
+                });
             }
 
             /**
              * 发送文字消息
              */
-            function sendMessage(){
+            function sendMessage(message,type){
                 let date = $filter('date')(new Date(),'yyyy-MM-dd HH:mm:ss');
                 value.msg_list.push({
                     "id":17076,
@@ -105,8 +108,8 @@ export default angular.module('chat')
                     "admin_id":41,
                     "admin_avatar":"",
                     "from":0,
-                    "type":1,
-                    "content":value.message.content,
+                    "type":     type,
+                    "content":  message,
                     "push_status":1,
                     "read_status":1,
                     "user_nickname":"15821121693",
@@ -117,9 +120,14 @@ export default angular.module('chat')
                     "created_at":   date,
                     "updated_at":   date
                 });
-                value.message.content = '';
+                if(type == 1){
+                    value.message.content = '';
+                }
+                $rootScope.$apply($scope.msg_list)
                 $scope.gotoBottom();
             }
+
+
         }]
     )
     .controller('ChatRightCtrl',['$rootScope','$scope','$timeout','$window','chat.value',

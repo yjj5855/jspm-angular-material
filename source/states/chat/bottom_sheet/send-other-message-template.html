@@ -6,5 +6,15 @@
                 <div class="md-grid-text"> {{ item.name }} </div>
             </md-button>
         </md-list-item>
+        <md-list-item>
+            <md-button class="md-grid-item-content" aria-label="发语音" ng-mousedown="startRecording()" ng-mouseup="stopRecording()">
+                <md-icon md-font-icon="mdi mdi-48px mdi-microphone"></md-icon>
+                <div class="md-grid-text">语音</div>
+            </md-button>
+        </md-list-item>
     </md-list>
+    <div id="recordingslist">
+
+    </div>
 </md-bottom-sheet>
+
