@@ -41,8 +41,8 @@ export default angular.module('chat')
             $scope.$on('audio_inputting',audio_inputting);
 
             function audio_inputting(event,audio_url){
-
                 $scope.sendMessage(audio_url,2);
+                $rootScope.$apply($scope.msg_list);
             }
 
             /**
@@ -123,7 +123,6 @@ export default angular.module('chat')
                 if(type == 1){
                     value.message.content = '';
                 }
-                $rootScope.$apply($scope.msg_list)
                 $scope.gotoBottom();
             }
 
