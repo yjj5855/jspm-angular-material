@@ -12,7 +12,7 @@
         </md-button>
     </div>
 </md-toolbar>
-<md-content layout="column" flex>
+<md-content layout="column">
     <md-content flex md-scroll-y class="bg-gray">
 
         <div class="direct-chat-messages">
@@ -48,31 +48,30 @@
     </md-content>
 
     <!-- 底部输入框-->
-    <md-content layout="row" style="overflow: hidden;position: relative;">
-        <div class="md-padding" flex>
-            <md-input-container md-no-float flex style="padding: 2px 96px 2px 10px!important;">
-                <input ng-model="message.content" type="text" id="message_input" aria-label="聊天文字">
-            </md-input-container>
-        </div>
+    <md-content layout="row" style="min-height: 48px;">
+
+        <md-input-container flex class="md-padding">
+            <input ng-model="message.content" type="text" id="message_input"  aria-label="聊天文字">
+        </md-input-container>
 
         <!-- 表情按钮-->
-        <md-button class="md-icon-button" ng-class="{'md-accent':open_face_status==true}" style="position: absolute;right: 48px;" ng-click="open_face_status = !open_face_status" aria-label="聊天表情">
+        <md-button class="md-icon-button" ng-class="{'md-accent':open_face_status==true}" style="" ng-click="open_face_status = !open_face_status" aria-label="聊天表情">
             <md-icon class="mdi mdi-24px mdi-emoticon c-green" class="name"></md-icon>
         </md-button>
 
         <!-- 发送按钮-->
-        <md-button class="md-icon-button" ng-class="{'md-accent':message.content.trim()!=''}" style="position: absolute;right: 0px;" ng-if="message.content !=''" aria-label="发送信息">
+        <md-button class="md-icon-button" ng-class="{'md-accent':message.content.trim()!=''}" style="" ng-if="message.content !=''" aria-label="发送信息">
             <md-icon class="mdi mdi-24px mdi-send" class="name"></md-icon>
         </md-button>
 
         <!-- +号按钮-->
-        <md-button class="md-icon-button" style="position: absolute;right: 0px;" ng-if="message.content ==''" aria-label="发送其他类型的信息"
+        <md-button class="md-icon-button" style="" ng-if="message.content ==''" aria-label="发送其他类型的信息"
                 ng-click="showGridBottomSheet($event)">
             <md-icon class="mdi mdi-24px mdi-plus-circle-outline c-green" class="name"></md-icon>
         </md-button>
     </md-content>
 
-    <face class="h-200" ng-show="open_face_status==true">
+    <face class="h-200" flex ng-show="open_face_status==true">
 
     </face>
 </md-content>
