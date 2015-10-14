@@ -16,6 +16,7 @@ import CoreRouter from 'source/core/core-router'
 var CoreModule = angular.module('myApp',[
     'ngRoute',
     'ngResource',
+    'ngMaterial',
 
     'env',
     'apiConfig',

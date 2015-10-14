@@ -1,6 +1,7 @@
 /**
  * Created by yangjiajun on 15/9/28.
  */
+import 'angular-material'
 
 import './chat-value'
 import SendOtherMessageHtml from './bottom_sheet/send-other-message-template.html!text'

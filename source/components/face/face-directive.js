@@ -3,6 +3,7 @@
  */
 
 import FaceTemplate from './face-template.html!text'
+import FaceWeiXinTemplate from './face-weixin-template.html!text'
 
 export default angular.module('chat')
     .directive('face',['$rootScope',function($rootScope){
@@ -12,9 +13,7 @@ export default angular.module('chat')
             transclude:true,
             scope:{
             },
-            template: function (element,attrs) {
-                return FaceTemplate;
-            },
+            template: $rootScope.is_weixn()?FaceWeiXinTemplate:FaceTemplate,
             link : function(scope, element, attrs){
                 scope.face_list = [
 

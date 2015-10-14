@@ -7,7 +7,6 @@ import SendOtherMessageHtml from './bottom_sheet/send-other-message-template.htm
 import SendOtherMessageCtrl from './bottom_sheet/send-other-message-controller';
 
 import 'source/filter/format-message'
-import $ from 'jquery'
 
 //表情控件
 import CmFace from 'source/components/face/face-directive'
@@ -17,18 +16,20 @@ import 'source/components/btn_back/btn-back-directive'
 import 'source/components/btn_audio/btn-audio-directive'
 
 export default angular.module('chat')
-    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter',
-        function($rootScope,$scope,$timeout,$window,value,$log,$filter){
+    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$filter',
+        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log,$filter){
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;
             $scope.message = value.message;
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
             $scope.user_info = value.user_info;
+            $scope.toggleRight = buildToggler('right');
+            $scope.showGridBottomSheet = showGridBottomSheet;
             $scope.gotoBottom = gotoBottom;
             $scope.sendMessage = sendMessage;
-            $scope.showFace = showFace;
-            $scope.hideFace = hideFace;
+
+
 
             /**
              * 监听表情控件的输入表情事件
@@ -43,6 +44,21 @@ export default angular.module('chat')
                 $scope.sendMessage(audio_url,2);
                 $rootScope.$apply($scope.msg_list);
             }
+
+            /**
+             * 根据md-component-id的值来显示或者隐藏侧栏
+             */
+            function buildToggler(navID) {
+                var debounceFn =  $mdUtil.debounce(function(){
+                    $mdSidenav(navID)
+                        .toggle()
+                        .then(function () {
+                            $log.debug("toggle " + navID + " is done");
+                        });
+                },200);
+                return debounceFn;
+            }
+
 
             /**
              * 监听表情输入
@@ -62,7 +78,22 @@ export default angular.module('chat')
                 },100)
             }
 
+            /**
+             * 显示底部框
+             * @param $event
+             * @param type
+             */
+            function showGridBottomSheet($event,type){
+                $mdBottomSheet.show({
+                    template: SendOtherMessageHtml,
+                    controller: 'SendOtherMessageCtrl',
+                    targetEvent: $event
+                }).then(function(clickedItem) {
 
+                    //showGridBottomSheet('','face');
+                    //$scope.open_face_status = value.open_face_status = true;
+                });
+            }
 
             /**
              * 发送文字消息
@@ -93,25 +124,7 @@ export default angular.module('chat')
                     value.message.content = '';
                 }
                 $scope.gotoBottom();
-                hideFace();
             }
 
 
-            function showFace(){
-                $scope.open_face_status = !$scope.open_face_status;
-                var el = $("#message_box");
-                if($scope.open_face_status){
-                    $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48-200);
-                }else{
-                    $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
-                }
-            }
-
-            function hideFace(){
-                $scope.open_face_status = false;
-                var el = $("#message_box");
-                $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
-            }
-
-        }]
-    )
+    }])
