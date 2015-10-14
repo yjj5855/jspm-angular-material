@@ -17,7 +17,7 @@ import 'source/components/btn_back/btn-back-directive'
 import 'source/components/btn_audio/btn-audio-directive'
 
 export default angular.module('chat')
-    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter',
+    .controller('ChatWeiXinCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter',
         function($rootScope,$scope,$timeout,$window,value,$log,$filter){
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;

@@ -1,4 +1,7 @@
 @import "color.css";
+*{
+    outline: 0;
+}
 body{
     overflow: hidden;
 }
@@ -20,7 +23,6 @@ body{
 .h-200{
     height: 200px;
 }
-
 .cm-fab-btn{
     position: absolute!important;
     margin-top: -30px!important;
@@ -294,4 +296,146 @@ body{
 
 .mg_0{
     margin: 0!important;
+}
+
+/*2015-10-14 兼容的X5内核的css*/
+body{
+    margin: 0;
+    padding: 0;
+}
+/*顶部栏*/
+.cm-toolbar {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    z-index: 2;
+    font-size: 20px;
+    min-height: 64px;
+    width: 100%;
+}
+.cm-toolbar{
+    min-height: 56px;
+}
+/*左边的工具按钮*/
+.cm-toolbar-tools{
+    font-size: 20px;
+    letter-spacing: 0.005em;
+    box-sizing: border-box;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+    height: 64px;
+    max-height: 64px;
+    padding: 3px 16px 3px 16px;
+    margin: 0;
+}
+.cm-toolbar-tools {
+    height: 56px;
+    max-height: 56px;
+}
+/*按钮基本样式*/
+.cm-button {
+    letter-spacing: .01em;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: currentColor;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    border: 0;
+    display: inline-block;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 6px;
+    margin: 6px 8px;
+    line-height: 36px;
+    min-height: 36px;
+    background: 0 0;
+    white-space: nowrap;
+    min-width: 88px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: inherit;
+    font-variant: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    overflow: hidden;
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+}
+/*图标按钮*/
+.cm-button.cm-icon-button {
+    margin: 0 6px;
+    height: 48px;
+    min-width: 0;
+    line-height: 48px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 48px;
+    border-radius: 50%;
+}
+
+.cm-toolbar-tools .cm-button {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.cm-toolbar-tools>.cm-button:first-child {
+    margin-left: -8px;
+}
+.cm-toolbar-tools>.cm-button:last-child, .cm-toolbar-tools>.cm-menu:last-child {
+    margin-right: -8px;
+}
+.cm-button.cm-fab, .cm-chips, .cm-checkbox .cm-label, .cm-icon {
+    vertical-align: middle;
+}
+.cm-icon {
+    margin: auto;
+    background-repeat: no-repeat no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+}
+
+.cm-toolbar-tools h1, .cm-toolbar-tools h2, .cm-toolbar-tools h3 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: inherit;
+    display: inline;
+}
+.cm-box{
+    overflow-y: auto;
+}
+
+.cm-input {
+    color: rgba(0,0,0,0.87);
+    border-color: rgba(0,0,0,0.12);
+}
+.cm-input {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    display: block;
+    margin-top: auto;
+    background: 0 0;
+    border-width: 0 0 1px;
+    line-height: 26px;
+    -ms-flex-preferred-size: 26px;
+    border-radius: 0;
+    padding: 2px 2px 1px;
+    font-size: 100%;
+}
+.cm-input:focus{
+    outline: 0;
+}
+.cm-padding{
+    padding: 8px;
+}
+
+.inline{
+    display: inline;
 }

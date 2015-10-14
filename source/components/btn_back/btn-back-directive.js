@@ -2,7 +2,7 @@
  * Created by yangjiajun on 15/10/8.
  *
  */
-export default angular.module('theme')
+export default angular.module('chat')
     .directive('cmBackBtn',['$window',function($window){
         return {
             restrict: 'AE',

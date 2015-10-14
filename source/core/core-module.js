@@ -1,35 +1,56 @@
 /**
  * Created by yangjiajun on 15/9/24.
  */
+import $ from 'jquery'
 import 'angular-route';
 import 'angular-resource'
 import '../service/ApiConfig'
 import '../env'
 import 'source/filter/format-message'
 
-import HomeModule from 'source/states/home/home-module'
-import IndexModule from 'source/states/index/index-module'
 import ChatModule from 'source/states/chat/chat-module'
-import ThemeModule from 'source/states/theme/theme-module'
 
 import CoreRouter from 'source/core/core-router'
-import CoreTheme  from 'source/core/core-theme'
 
 
 var CoreModule = angular.module('myApp',[
     'ngRoute',
-    'ngMaterial',
     'ngResource',
 
     'env',
-    'apiConfig','Qa',
+    'apiConfig',
     'format_msg',
-    IndexModule.name,
-    HomeModule.name,
     ChatModule.name,
-    ThemeModule.name,
 ])
     .config(CoreRouter)
-    .config(CoreTheme);
+    .controller('myAppCtrl',['$rootScope',function($rootScope){
+        $rootScope.is_weixn = is_weixn;
+
+        //页面加载完成后自适应屏幕
+        $rootScope.$on('$viewContentLoaded', function() {
+            $rootScope.winheight= $(window).height();
+            $rootScope.winwidth = $(window).width();
+            $rootScope.header = is_weixn()?0:56;
+            var el = $("#message_box");
+            if(el.length == 1){
+                $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
+                $("#message_input").css('width',$rootScope.winwidth-48-48-52-30);
+                $("#audio_input").css('width',$rootScope.winwidth-48-52-10);
+            }
+        });
+
+        /**
+         * 判断是否在微信打开
+         * @returns {boolean}
+         */
+        function is_weixn(){
+            var ua = navigator.userAgent.toLowerCase();
+            if(ua.match(/MicroMessenger/i)=="micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }])
 
 export default CoreModule
