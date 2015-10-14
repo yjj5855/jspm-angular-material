@@ -16,6 +16,8 @@ import CmFace from 'source/components/face/face-directive'
 import 'source/components/btn_back/btn-back-directive'
 //语音按钮指令
 import 'source/components/btn_audio/btn-audio-directive'
+//微信jssdk
+import 'source/lib/weixin/jweixin-1.0.0'
 
 export default angular.module('chat')
     .controller('ChatWeiXinCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter',
@@ -63,8 +65,6 @@ export default angular.module('chat')
                 },100)
             }
 
-
-
             /**
              * 发送文字消息
              */
@@ -97,7 +97,9 @@ export default angular.module('chat')
                 hideFace();
             }
 
-
+            /**
+             * 显示表情
+             */
             function showFace(){
                 $scope.open_face_status = !$scope.open_face_status;
                 var el = $("#message_box");

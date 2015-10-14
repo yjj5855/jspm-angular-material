@@ -13,7 +13,7 @@ export default angular.module('chat')
             transclude:true,
             scope:{
             },
-            template: $rootScope.is_weixn()?FaceWeiXinTemplate:FaceTemplate,
+            template: $rootScope.is_weixn?FaceWeiXinTemplate:FaceTemplate,
             link : function(scope, element, attrs){
                 scope.face_list = [
 

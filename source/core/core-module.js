@@ -25,14 +25,14 @@ var CoreModule = angular.module('myApp',[
 ])
     .config(CoreRouter)
     .controller('myAppCtrl',['$rootScope',function($rootScope){
-        $rootScope.is_weixn = is_weixn;
+        $rootScope.is_weixn = window.is_weixn();
 
-        if(is_weixn()){
+        if($rootScope.is_weixn){
             //页面加载完成后自适应屏幕
             $rootScope.$on('$viewContentLoaded', function() {
                 $rootScope.winheight= $(window).height();
                 $rootScope.winwidth = $(window).width();
-                $rootScope.header = is_weixn()?0:56;
+                $rootScope.header = $rootScope.is_weixn?0:56;
                 var el = $("#message_box");
                 if(el.length == 1){
                     $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
@@ -42,18 +42,6 @@ var CoreModule = angular.module('myApp',[
             });
         }
 
-        /**
-         * 判断是否在微信打开
-         * @returns {boolean}
-         */
-        function is_weixn(){
-            var ua = navigator.userAgent.toLowerCase();
-            if(ua.match(/MicroMessenger/i)=="micromessenger") {
-                return true;
-            } else {
-                return false;
-            }
-        }
     }]);
 
 export default CoreModule
