@@ -12,8 +12,6 @@ import 'source/filter/format-message'
 import CmFace from 'source/components/face/face-directive'
 //返回按钮指令
 import 'source/components/btn_back/btn-back-directive'
-//语音按钮指令
-import 'source/components/btn_audio/btn-audio-directive'
 
 export default angular.module('chat')
     .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$filter',
