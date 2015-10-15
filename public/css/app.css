@@ -378,7 +378,9 @@ body{
     width: 48px;
     border-radius: 50%;
 }
-
+.cm-button:disabled,.cm-button.cm-icon-button:disabled{
+    color: #b5b5b5;
+}
 .cm-toolbar-tools .cm-button {
     margin-top: 0;
     margin-bottom: 0;
@@ -438,4 +440,11 @@ body{
 
 .inline{
     display: inline;
+}
+
+.tuigunang-box{
+    color: #fff;
+    background-color:#000000;
+    background-color:rgba(0,0,0,0.5);
+    position: absolute;width: 100%;top: 0px;height: 56px;
 }

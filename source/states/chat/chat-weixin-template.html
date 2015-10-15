@@ -19,8 +19,8 @@
                     <!-- 客服的气泡-->
                     <div class="direct-chat-msg" ng-if="msg.from == 1">
                         <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at}}</span>
-                            <p class="direct-chat-name">{{msg.admin_name}}</p>
+                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date:true}}</span>
+                            <!--<p class="direct-chat-name">{{msg.admin_name}}</p>-->
                         </div>
 
                         <img class="direct-chat-img" ng-src="{{service_info.avatar}}" alt="message user image">
@@ -32,8 +32,8 @@
                     <!-- 用户的气泡-->
                     <div class="direct-chat-msg right" ng-if="msg.from == 0">
                         <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at}}</span>
-                            <p class="direct-chat-name right">{{msg.user_nickname}}</p>
+                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date:true}}</span>
+                            <!--<p class="direct-chat-name right">{{msg.user_nickname}}</p>-->
                         </div>
                         <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
                         <div class="direct-chat-text" ng-bind-html="msg.content|format_msg:msg.type">
@@ -51,11 +51,11 @@
 <div style="min-height: 48px;width: 100%;">
 
     <!-- 语音按钮-->
-    <cm-audio-btn ng-model="open_audio_status" ng-click="hideFace()">
-        <button class="cm-button cm-icon-button mg_0" ng-class="{'md-accent':open_audio_status==true}"  aria-label="聊天语音">
+    <div class="inline" ng-click="toggleAd()">
+        <button class="cm-button cm-icon-button mg_0" ng-class="{'md-accent':open_audio_status==true}"  aria-label="聊天语音" disabled>
             <i class="cm-icon mdi mdi-24px mdi-microphone c-green"></i>
         </button>
-    </cm-audio-btn>
+    </div>
 
     <!-- 语音输入按钮-->
     <cm-audio-input-btn class="inline" ng-show="open_audio_status == true" >
@@ -64,7 +64,7 @@
         </button>
     </cm-audio-input-btn>
 
-    <div class="cm-padding inline" ng-show="open_audio_status == false" id="message_input_box">
+    <div class="cm-padding inline" style="padding-left: 0;" ng-show="open_audio_status == false" id="message_input_box">
         <input class="cm-input inline" ng-model="message.content" type="text" id="message_input" ng-focus="hideFace()" aria-label="聊天文字">
     </div>
 
@@ -80,7 +80,7 @@
 
     <!-- +号按钮-->
     <button class="cm-button cm-icon-button mg_0" ng-if="message.content ==''||open_audio_status == true" aria-label="发送其他类型的信息"
-               ng-click="showGridBottomSheet($event)">
+               ng-click="toggleAd()">
         <i class="cm-icon mdi mdi-24px mdi-plus-circle-outline c-green"></i>
     </button>
 </div>
@@ -88,3 +88,12 @@
 <face class="h-200" flex ng-show="open_face_status==true">
 
 </face>
+
+<div class="tuigunang-box" ng-show="openAd ==  true">
+    <div style="position: relative;">
+        <p style="text-align: center;">下载车知了APP，了解更多用车问题！</p>
+        <button class="cm-button cm-icon-button mg_0" ng-click="openAd = false" style="position: absolute;right: 12px;top:-12px;">
+            <i class="cm-icon mdi mdi-24px mdi-close-circle-outline"></i>
+        </button>
+    </div>
+</div>

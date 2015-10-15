@@ -14,12 +14,11 @@ import $ from 'jquery'
 import CmFace from 'source/components/face/face-directive'
 //返回按钮指令
 import 'source/components/btn_back/btn-back-directive'
-//微信jssdk
-import 'source/lib/weixin/jweixin-1.0.0'
+
 
 export default angular.module('chat')
-    .controller('ChatWeiXinCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter',
-        function($rootScope,$scope,$timeout,$window,value,$log,$filter){
+    .controller('ChatWeiXinCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter','wxService','socket',
+        function($rootScope,$scope,$timeout,$window,value,$log,$filter,wxService,socketService){
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;
             $scope.message = value.message;
@@ -30,20 +29,29 @@ export default angular.module('chat')
             $scope.sendMessage = sendMessage;
             $scope.showFace = showFace;
             $scope.hideFace = hideFace;
+            $scope.toggleAd = toggleAd;
+
+
+            socketService.connect()
+                .then(socketService.loginIM);
+
+            $scope.$on(socketService.im.cmd_login,function(data){
+
+            });
 
             /**
              * 监听表情控件的输入表情事件
              */
             $scope.$on('face_inputting',face_inputting);
-            /**
-             * 监听语音输入
-             */
-            $scope.$on('audio_inputting',audio_inputting);
 
-            function audio_inputting(event,audio_url){
-                $scope.sendMessage(audio_url,2);
-                $rootScope.$apply($scope.msg_list);
-            }
+            /**
+             * 初始化微信分享
+             */
+            wxService.init({
+                title:"车知了--做你身边懂车的朋友",
+                desc:"用车问题专业技师一对一解答，一键提问一分钟响应",
+                link:document.URL
+            });
 
             /**
              * 监听表情输入
@@ -67,27 +75,18 @@ export default angular.module('chat')
              * 发送文字消息
              */
             function sendMessage(message,type){
-                let date = $filter('date')(new Date(),'yyyy-MM-dd HH:mm:ss');
-                value.msg_list.push({
-                    "id":17076,
-                    "session_id":"434-1442899152457",
-                    "msg_id":"1442899151741",
-                    "user_avatar":"",
-                    "admin_id":41,
-                    "admin_avatar":"",
-                    "from":0,
+                let time = new Date();
+                let date = $filter('date')(time,'yyyy-MM-dd HH:mm:ss');
+                let msg = {
+                    "msg_id":   time.getTime(),
+                    "from":     0,
                     "type":     type,
                     "content":  message,
-                    "push_status":1,
-                    "read_status":1,
-                    "user_nickname":"15821121693",
-                    "user_id":434,
-                    "admin_nickname":"\u6d4b\u8bd5",
-                    "admin_name":"cjl",
-                    "chat_session_id":928,
                     "created_at":   date,
                     "updated_at":   date
-                });
+                };
+                socketService.sendMsg(msg);
+                value.msg_list.push(msg);
                 if(type == 1){
                     value.message.content = '';
                 }
@@ -113,6 +112,19 @@ export default angular.module('chat')
                 var el = $("#message_box");
                 $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
             }
+
+            /**
+             * 显示广告
+             */
+            function toggleAd(){
+                if(angular.isUndefined($scope.openAd)){
+                    $scope.openAd = true;
+                }else{
+                    $scope.openAd = !$scope.openAd;
+                }
+
+            }
+
 
         }]
     )

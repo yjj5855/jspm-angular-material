@@ -7,8 +7,11 @@ import 'angular-resource'
 import '../service/ApiConfig'
 import '../env'
 import 'source/filter/format-message'
+import 'source/filter/format-date'
 
 import ChatModule from 'source/states/chat/chat-module'
+import WXModule from 'source/service/WXService'
+import SocketModule from 'source/service/SocketService'
 
 import CoreRouter from 'source/core/core-router'
 
@@ -18,9 +21,9 @@ var CoreModule = angular.module('myApp',[
     'ngResource',
     'ngMaterial',
 
-    'env',
-    'apiConfig',
-    'format_msg',
+    'env','apiConfig',
+    WXModule.name,SocketModule.name,
+    'format_msg','format_date',
     ChatModule.name,
 ])
     .config(CoreRouter)

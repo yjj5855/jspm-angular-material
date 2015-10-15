@@ -6,14 +6,17 @@ import ChatWeiXinTpl from './chat-weixin-template.html!text';
 import ChatCtrl from './chat-controller';
 import ChatWeiXinCtrl from './chat-weixin-controller';
 
-var ChatRoute = {
-    template    :   ChatWeiXinTpl,
-    controller  :  'ChatWeiXinCtrl'
-};
+var ChatRoute = {};
+
 if(!window.is_weixn()){
     ChatRoute = {
         template    :   ChatTpl,
         controller  :  'ChatCtrl'
+    };
+}else{
+    ChatRoute = {
+        template    :   ChatWeiXinTpl,
+        controller  :  'ChatWeiXinCtrl'
     };
 }
 
