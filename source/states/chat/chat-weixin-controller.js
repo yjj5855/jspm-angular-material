@@ -25,6 +25,7 @@ export default angular.module('chat')
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
             $scope.user_info = value.user_info;
+            
             $scope.gotoBottom = gotoBottom;
             $scope.sendMessage = sendMessage;
             $scope.showFace = showFace;
@@ -85,13 +86,13 @@ export default angular.module('chat')
                     "created_at":   date,
                     "updated_at":   date
                 };
-                socketService.sendMsg(msg);
-                value.msg_list.push(msg);
                 if(type == 1){
                     value.message.content = '';
                 }
+                value.msg_list.push(msg);
                 $scope.gotoBottom();
                 hideFace();
+                socketService.sendMsg(msg);
             }
 
             /**

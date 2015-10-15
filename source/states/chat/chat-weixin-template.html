@@ -57,31 +57,24 @@
         </button>
     </div>
 
-    <!-- 语音输入按钮-->
-    <cm-audio-input-btn class="inline" ng-show="open_audio_status == true" >
-        <button class="inline cm-button" id="audio_input" ng-show="open_audio_status == true" style="margin-left: 0;margin-right: 0;">
-            按住  说话
-        </button>
-    </cm-audio-input-btn>
-
     <div class="cm-padding inline" style="padding-left: 0;" ng-show="open_audio_status == false" id="message_input_box">
         <input class="cm-input inline" ng-model="message.content" type="text" id="message_input" ng-focus="hideFace()" aria-label="聊天文字">
     </div>
 
     <!-- 表情按钮-->
-    <button class="cm-button cm-icon-button mg_0" ng-hide="open_audio_status == true" ng-class="{'md-accent':open_face_status==true}" ng-click="showFace()" aria-label="聊天表情">
+    <button class="cm-button cm-icon-button mg_0" ng-class="{'md-accent':open_face_status==true}" ng-click="showFace()" aria-label="聊天表情">
         <i class="cm-icon mdi mdi-24px mdi-emoticon c-green"></i>
     </button>
 
     <!-- 发送按钮-->
-    <button class="cm-button cm-icon-button mg_0" ng-click="sendMessage(message.content,1)"  ng-class="{'md-accent':message.content.trim()!=''}" style="" ng-if="message.content !='' && open_audio_status != true" aria-label="发送信息">
+    <button class="cm-button cm-icon-button mg_0" ng-show="message.content !='' " ng-click="sendMessage(message.content,1)"  ng-class="{'md-accent':message.content.trim()!=''}"  style="transition: none;">
         <i class="cm-icon mdi mdi-24px mdi-send"></i>
     </button>
 
     <!-- +号按钮-->
-    <button class="cm-button cm-icon-button mg_0" ng-if="message.content ==''||open_audio_status == true" aria-label="发送其他类型的信息"
+    <button class="cm-button cm-icon-button mg_0" ng-show="message.content ==''" aria-label="发送其他类型的信息"
                ng-click="toggleAd()">
-        <i class="cm-icon mdi mdi-24px mdi-plus-circle-outline c-green"></i>
+        <i class="cm-icon mdi mdi-24px mdi-plus-circle-outline"></i>
     </button>
 </div>
 
