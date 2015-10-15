@@ -28,3 +28,23 @@ var taskDependencies = (function() {
 gulp.task('default', taskDependencies, function() {
     // Default Task Denifition
 });
+
+/**
+ *  minify: Use minification, defaults to true.
+    mangle: Use mangling with minification, defaults to true.
+    lowResSourceMaps: Use faster low-resolution source maps, defaults to true.
+    sourceMaps: Use source maps, defaults to true.
+ */
+
+var jspm = require('jspm');
+
+gulp.task('jspm',function(){
+    jspm.setPackagePath('.');
+    jspm.bundle('source/app','build.js',{
+        sourceMaps:false,
+        minify:true,
+
+    }).then(function(){
+        console.log('编译成功！');
+    })
+})
