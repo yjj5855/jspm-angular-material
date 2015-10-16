@@ -1,26 +1,22 @@
-FROM debian:jessie
 
-MAINTAINER NGINX Docker Maintainers "docker-maint@nginx.com"
+FROM ubuntu
 
-RUN apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 573BFD6B3D8FBC641079A6ABABF5BD827BD9BF62
-RUN echo "deb http://nginx.org/packages/mainline/debian/ jessie nginx" >> /etc/apt/sources.list
+MAINTAINER Maintaner Name
 
-ENV NGINX_VERSION 1.9.4-1~jessie
+RUN echo "deb http://archive.ubuntu.com/ubuntu/ raring main universe" >> /etc/apt/sources.list
 
-RUN apt-get update && \
-    apt-get install -y ca-certificates nginx=${NGINX_VERSION} && \
-    rm -rf /var/lib/apt/lists/*
+RUN apt-get update
 
-# forward request and error logs to docker log collector
-RUN ln -sf /dev/stdout /var/log/nginx/access.log
-RUN ln -sf /dev/stderr /var/log/nginx/error.log
+RUN apt-get install -y nano wget dialog net-tools
 
-RUN rm -v /var/cache/nginx/nginx.conf
+RUN apt-get install -y nginx
 
-ADD ./nginx.conf /etc/nginx/
+RUN rm -v /etc/nginx/nginx.conf
 
-VOLUME ["/var/cache/nginx"]
+ADD nginx.conf /etc/nginx/
 
-EXPOSE 80 443
+RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 80
+
+CMD service nginx start
