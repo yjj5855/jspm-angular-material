@@ -12,11 +12,8 @@ ADD nginx.conf /etc/nginx/
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-ADD public /app/
-ADD config.js /app/
-ADD build.js /app/
-ADD jspm_packages/system.js /app/jspm_packages/
-ADD jspm_packages/system.src.js /app/jspm_packages/
+ADD dist /app/
+
 
 EXPOSE 80
 

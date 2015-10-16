@@ -1,0 +1,450 @@
+@import "color.css";
+*{
+    outline: 0;
+}
+body{
+    overflow: hidden;
+}
+.site-content-toolbar {
+    background: #f6f6f6 !important;
+    color: #202020 !important;
+    z-index: 3;
+}
+
+.dis-block{
+    display: block;
+}
+
+.lh-36{
+    height: 36px;
+    line-height: 36px;
+}
+
+.h-200{
+    height: 200px;
+}
+.cm-fab-btn{
+    position: absolute!important;
+    margin-top: -30px!important;
+    right: 10px!important;
+
+
+}
+.cm-fab-btn.active{
+    z-index: 9!important;
+    -webkit-animation:tobig 1s .2s ease both;
+    -moz-animation:tobig 1s .2s ease both;
+}
+/*悬浮按钮 动画*/
+#animation{
+    -webkit-animation:tobig 1s .2s ease both;
+    -moz-animation:tobig 1s .2s ease both;}
+@-webkit-keyframes tobig{
+    0%{-webkit-transform:scale(1)}
+    100%{-webkit-transform:scale(50)}
+}
+@-moz-keyframes tobig{
+    0%{-moz-transform:scale(1)}
+    100%{-moz-transform:scale(50)}
+}
+
+/*聊天框CSS*/
+/*
+ * Component: Direct Chat
+ * ----------------------
+ */
+.direct-chat .box-body {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    position: relative;
+    overflow-x: hidden;
+    padding: 0;
+}
+.direct-chat.chat-pane-open .direct-chat-contacts {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+.direct-chat-messages {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+    padding: 10px;
+    /*height: 250px;*/
+    overflow: auto;
+}
+.direct-chat-msg,
+.direct-chat-text {
+    display: block;
+}
+.direct-chat-msg {
+    margin-bottom: 10px;
+}
+.direct-chat-msg:before,
+.direct-chat-msg:after {
+    content: " ";
+    display: table;
+}
+.direct-chat-msg:after {
+    clear: both;
+}
+.direct-chat-messages,
+.direct-chat-contacts {
+    -webkit-transition: -webkit-transform 0.5s ease-in-out;
+    -moz-transition: -moz-transform 0.5s ease-in-out;
+    -o-transition: -o-transform 0.5s ease-in-out;
+    transition: transform 0.5s ease-in-out;
+}
+.direct-chat-text {
+    border-radius: 5px;
+    position: relative;
+    padding: 5px 10px;
+    background: #d2d6de;
+    border: 1px solid #d2d6de;
+    margin: 5px 0 0 50px;
+    color: #444444;
+}
+.direct-chat-text:after,
+.direct-chat-text:before {
+    position: absolute;
+    right: 100%;
+    top: 15px;
+    border: solid transparent;
+    border-right-color: #d2d6de;
+    content: ' ';
+    height: 0;
+    width: 0;
+    pointer-events: none;
+}
+.direct-chat-text:after {
+    border-width: 5px;
+    margin-top: -5px;
+}
+.direct-chat-text:before {
+    border-width: 6px;
+    margin-top: -6px;
+}
+.right .direct-chat-text {
+    margin-right: 50px;
+    margin-left: 0;
+}
+.right .direct-chat-text:after,
+.right .direct-chat-text:before {
+    right: auto;
+    left: 100%;
+    border-right-color: transparent;
+    border-left-color: #d2d6de;
+}
+.direct-chat-img {
+    border-radius: 50%;
+    float: left;
+    width: 40px;
+    height: 40px;
+}
+.right .direct-chat-img {
+    float: right;
+}
+.direct-chat-info {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+}
+.direct-chat-name {
+    font-weight: 600;
+}
+.direct-chat-timestamp {
+    color: #999;
+}
+.direct-chat-contacts-open .direct-chat-contacts {
+    -webkit-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
+}
+.direct-chat-contacts {
+    -webkit-transform: translate(101%, 0);
+    -ms-transform: translate(101%, 0);
+    -o-transform: translate(101%, 0);
+    transform: translate(101%, 0);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 250px;
+    width: 100%;
+    background: #222d32;
+    color: #fff;
+    overflow: auto;
+}
+.contacts-list > li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin: 0;
+}
+.contacts-list > li:before,
+.contacts-list > li:after {
+    content: " ";
+    display: table;
+}
+.contacts-list > li:after {
+    clear: both;
+}
+.contacts-list > li:last-of-type {
+    border-bottom: none;
+}
+.contacts-list-img {
+    border-radius: 50%;
+    width: 40px;
+    float: left;
+}
+.contacts-list-info {
+    margin-left: 45px;
+    color: #fff;
+}
+.contacts-list-name,
+.contacts-list-status {
+    display: block;
+}
+.contacts-list-name {
+    font-weight: 600;
+}
+.contacts-list-status {
+    font-size: 12px;
+}
+.contacts-list-date {
+    color: #aaa;
+    font-weight: normal;
+}
+.contacts-list-msg {
+    color: #999;
+}
+.direct-chat-danger .right > .direct-chat-text {
+    background: #dd4b39;
+    border-color: #dd4b39;
+    color: #ffffff;
+}
+.direct-chat-danger .right > .direct-chat-text:after,
+.direct-chat-danger .right > .direct-chat-text:before {
+    border-left-color: #dd4b39;
+}
+.direct-chat-primary .right > .direct-chat-text {
+    background: #3c8dbc;
+    border-color: #3c8dbc;
+    color: #ffffff;
+}
+.direct-chat-primary .right > .direct-chat-text:after,
+.direct-chat-primary .right > .direct-chat-text:before {
+    border-left-color: #3c8dbc;
+}
+.direct-chat-warning .right > .direct-chat-text {
+    background: #f39c12;
+    border-color: #f39c12;
+    color: #ffffff;
+}
+.direct-chat-warning .right > .direct-chat-text:after,
+.direct-chat-warning .right > .direct-chat-text:before {
+    border-left-color: #f39c12;
+}
+.direct-chat-info .right > .direct-chat-text {
+    background: #00c0ef;
+    border-color: #00c0ef;
+    color: #ffffff;
+}
+.direct-chat-info .right > .direct-chat-text:after,
+.direct-chat-info .right > .direct-chat-text:before {
+    border-left-color: #00c0ef;
+}
+.direct-chat-success .right > .direct-chat-text {
+    background: #00a65a;
+    border-color: #00a65a;
+    color: #ffffff;
+}
+.direct-chat-success .right > .direct-chat-text:after,
+.direct-chat-success .right > .direct-chat-text:before {
+    border-left-color: #00a65a;
+}
+
+.direct-chat-info{
+    text-align: center;
+}
+.direct-chat-timestamp{
+    font-size: 16px;
+}
+.direct-chat-text{
+    display: inline-block;
+    max-width: 70%;
+    margin: 5px 0 0 10px;
+}
+.right .direct-chat-text {
+    float: right;
+    margin-right: 10px;
+}
+.direct-chat-name{
+    position: absolute;
+    margin-top: -20px;
+    font-size: 16px;
+}
+.direct-chat-name.right{
+    right: 10px;
+}
+/**/
+
+.mdi.mdi-48px{
+    height: 48px;
+}
+
+.mg_0{
+    margin: 0!important;
+}
+
+/*2015-10-14 兼容的X5内核的css*/
+body{
+    margin: 0;
+    padding: 0;
+}
+/*顶部栏*/
+.cm-toolbar {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    z-index: 2;
+    font-size: 20px;
+    min-height: 64px;
+    width: 100%;
+}
+.cm-toolbar{
+    min-height: 56px;
+}
+/*左边的工具按钮*/
+.cm-toolbar-tools{
+    font-size: 20px;
+    letter-spacing: 0.005em;
+    box-sizing: border-box;
+    font-weight: 400;
+    display: block;
+    width: 100%;
+    height: 64px;
+    max-height: 64px;
+    padding: 3px 16px 3px 16px;
+    margin: 0;
+}
+.cm-toolbar-tools {
+    height: 56px;
+    max-height: 56px;
+}
+/*按钮基本样式*/
+.cm-button {
+    letter-spacing: .01em;
+    border-radius: 3px;
+    box-sizing: border-box;
+    color: currentColor;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    position: relative;
+    border: 0;
+    display: inline-block;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 6px;
+    margin: 6px 8px;
+    line-height: 36px;
+    min-height: 36px;
+    background: 0 0;
+    white-space: nowrap;
+    min-width: 88px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+    font-style: inherit;
+    font-variant: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    overflow: hidden;
+    transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+}
+/*图标按钮*/
+.cm-button.cm-icon-button {
+    margin: 0 6px;
+    height: 48px;
+    min-width: 0;
+    line-height: 48px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 48px;
+    border-radius: 50%;
+}
+.cm-button:disabled,.cm-button.cm-icon-button:disabled{
+    color: #b5b5b5;
+}
+.cm-toolbar-tools .cm-button {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.cm-toolbar-tools>.cm-button:first-child {
+    margin-left: -8px;
+}
+.cm-toolbar-tools>.cm-button:last-child, .cm-toolbar-tools>.cm-menu:last-child {
+    margin-right: -8px;
+}
+.cm-button.cm-fab, .cm-chips, .cm-checkbox .cm-label, .cm-icon {
+    vertical-align: middle;
+}
+.cm-icon {
+    margin: auto;
+    background-repeat: no-repeat no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 24px;
+    width: 24px;
+}
+
+.cm-toolbar-tools h1, .cm-toolbar-tools h2, .cm-toolbar-tools h3 {
+    font-size: inherit;
+    font-weight: inherit;
+    margin: inherit;
+    display: inline;
+}
+.cm-box{
+    overflow-y: auto;
+}
+
+.cm-input {
+    color: rgba(0,0,0,0.87);
+    border-color: rgba(0,0,0,0.12);
+}
+.cm-input {
+    -webkit-order: 2;
+    -ms-flex-order: 2;
+    order: 2;
+    display: block;
+    margin-top: auto;
+    background: 0 0;
+    border-width: 0 0 1px;
+    line-height: 26px;
+    -ms-flex-preferred-size: 26px;
+    border-radius: 0;
+    padding: 2px 2px 1px;
+    font-size: 100%;
+}
+.cm-input:focus{
+    outline: 0;
+}
+.cm-padding{
+    padding: 8px;
+}
+
+.inline{
+    display: inline;
+}
+
+.tuigunang-box{
+    color: #fff;
+    background-color:#000000;
+    background-color:rgba(0,0,0,0.5);
+    position: absolute;width: 100%;top: 0px;height: 56px;
+}
