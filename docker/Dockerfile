@@ -12,7 +12,7 @@ ADD nginx.conf /etc/nginx/
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-ADD ../public/* /app/public/*
+ADD ../public /app/public
 ADD ../config.js /app/config.js
 ADD ../build.js /app/build.js
 ADD ../jspm_packages/system.js /app/jspm_packages/system.js
