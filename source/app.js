@@ -4,7 +4,7 @@
 
 import 'jquery'
 import 'angular';
-import 'mdi/css/materialdesignicons.css!'
+import 'public/css/materialdesignicons.css!'
 import 'public/css/app.css!'
 
 import AppModule from './core/core-module'
