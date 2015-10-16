@@ -58,6 +58,7 @@ gulp.task('jspm',['public'],function(){
     jspm.bundle('source/app','./dist/build.js',{
         sourceMaps:false,
         minify:true,
+        bundles:true
 
     }).then(function(){
         gulp.src([
