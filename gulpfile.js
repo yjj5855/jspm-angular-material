@@ -47,4 +47,4 @@ gulp.task('jspm',function(){
     }).then(function(){
         console.log('编译成功！');
     })
-})
+});
