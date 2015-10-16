@@ -12,7 +12,7 @@ ADD nginx.conf /etc/nginx/
 
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-ADD ../ /app/
+ADD / /app/
 
 EXPOSE 80
 
