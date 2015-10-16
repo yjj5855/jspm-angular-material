@@ -94,18 +94,33 @@ export default angular.module('socket',[])
 
         //登陆
         loginIM: function(userInfo){
+            //{
+            //    "alpha_id":"fhb",
+            //    "nickname":"15900804441",
+            //    "user_token":"iC2TC\/JIadWAAlOew7Eb0A==",
+            //    "appoint_number":0,
+            //    "address":"",
+            //    "gender_str":"男",
+            //    "car_number":"",
+            //    "answer_number":15,
+            //    "gender":1,
+            //    "user_id":4283,
+            //    "realname":"杨佳",
+            //    "telephone":"15900804441",
+            //    "car_type_name":""
+            //}
             var userInfo = { 
-                'uin': 213456,     
-                'nick':'frank',
-                'pic': 'http://pic.chezhi.com/1.jpg',
-                'location':'上海',
-                'address':'上海市浦东新区',
-                'token':'afsadfbckkckckck',
-                'client_type': 1,
-                'client_id':'asfjsdkfjsdklflsd',
-                'client_ver':'3.0.1',
-                'channel': 'czl_qq',
-                'latitude':'fsddsfsd',
+                'uin': 4283,
+                'nick':'15900804441',
+                'pic': '',
+                'location':'',
+                'address':'',
+                'token':'iC2TC\/JIadWAAlOew7Eb0A==',
+                'client_type': 3,
+                'client_id':'',
+                'client_ver':'',
+                'channel': '',//渠道
+                'latitude':''
             };
             setTimeout(()=>{
                 console.log('正在登陆');

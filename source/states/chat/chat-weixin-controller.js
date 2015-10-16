@@ -37,7 +37,19 @@ export default angular.module('chat')
                 .then(socketService.loginIM);
 
             $scope.$on(socketService.im.cmd_login,function(data){
+                console.log('登陆成功')
+            });
 
+            $scope.$on(socketService.im.cmd_chat_msg,function(msg){
+                value.msg_list.push({
+                    "msg_id":   msg.msg_id,
+                    "from":     1,
+                    "type":     msg.type,
+                    "content":  msg.content,
+                    "created_at":   msg.time,
+                    "updated_at":   msg.time
+                })
+                $rootScope.$apply('msg_list')
             });
 
             /**
