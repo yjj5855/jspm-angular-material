@@ -21,6 +21,7 @@
     "browser-sync": "^2.9.6",
     "gulp": "^3.9.0",
     "js-yaml": "^3.4.2",
+    "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-uglify": "^1.2.0",
     "gulp-html-replace": "^1.5.1"

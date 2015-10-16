@@ -6,6 +6,8 @@ var gulp        = require('gulp');
 // var proxy       = require('proxy-middleware');
 // var url         = require('url');
 var browserSync = require('browser-sync');
+
+var clean = require('gulp-clean');
 var concat  = require('gulp-concat');
 var uglify  = require('gulp-uglify');
 var htmlreplace = require('gulp-html-replace');//页面替换
@@ -41,7 +43,13 @@ gulp.task('default', taskDependencies, function() {
 
 var jspm = require('jspm');
 
-gulp.task('public',function(){
+//清空dist
+gulp.task('clean', function() {
+    return gulp.src(['./dist'], {read: false})
+        .pipe(clean({force: true}));
+});
+
+gulp.task('public',['clean'],function(){
     gulp.src('./public/**').pipe(gulp.dest('./dist/public'));
 })
 
