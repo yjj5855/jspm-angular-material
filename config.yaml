@@ -14,6 +14,7 @@ browserSync: &browserSync
       "/config.js": "./config.js"
       "/jspm_packages": "./jspm_packages/"
       "/source": "./source/"
+      "/chat":  "./public/index.html"
     # middleware: []
   startPath: "/"
   host: "127.0.0.1"

@@ -17,8 +17,8 @@ import 'source/components/btn_back/btn-back-directive'
 
 
 export default angular.module('chat')
-    .controller('ChatWeiXinCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$log','$filter','wxService','socket',
-        function($rootScope,$scope,$timeout,$window,value,$log,$filter,wxService,socketService){
+    .controller('ChatWeiXinCtrl',['$rootScope','$scope','$routeParams','$timeout','$window','chat.value','$log','$filter','wxService','socket',
+        function($rootScope,$scope,$routeParams,$timeout,$window,value,$log,$filter,wxService,socketService){
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;
             $scope.message = value.message;
@@ -32,9 +32,10 @@ export default angular.module('chat')
             $scope.hideFace = hideFace;
             $scope.toggleAd = toggleAd;
 
+            console.log($routeParams);
 
             $scope.$on(socketService.im.cmd_login,function(event,data){
-                console.log('登陆成功')
+                console.log('登陆成功');
             });
 
             $scope.$on(socketService.im.cmd_chat_msg,function(event,msg){
@@ -45,7 +46,7 @@ export default angular.module('chat')
                     "content":  msg.content,
                     "created_at":   msg.time,
                     "updated_at":   msg.time
-                })
+                });
                 $rootScope.$apply('msg_list')
             });
 

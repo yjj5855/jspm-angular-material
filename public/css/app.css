@@ -5,6 +5,9 @@
 body{
     overflow: hidden;
 }
+div[ng-view]{
+    background-color: #fff;
+}
 .site-content-toolbar {
     background: #f6f6f6 !important;
     color: #202020 !important;
@@ -27,8 +30,6 @@ body{
     position: absolute!important;
     margin-top: -30px!important;
     right: 10px!important;
-
-
 }
 .cm-fab-btn.active{
     z-index: 9!important;

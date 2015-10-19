@@ -56,9 +56,9 @@ gulp.task('public',['clean'],function(){
 gulp.task('jspm',['public'],function(){
     jspm.setPackagePath('.');
     jspm.bundle('source/app','./dist/build.js',{
+        inject:true,
         sourceMaps:false,
         minify:true,
-        bundles:true
 
     }).then(function(){
         gulp.src([
@@ -77,6 +77,6 @@ gulp.task('jspm',['public'],function(){
             }))
             .pipe(gulp.dest('./dist/public'))
 
-        console.log('编译成功！');
+        console.log('执行成功！');
     })
 });

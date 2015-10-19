@@ -4,7 +4,7 @@ import io from 'source/lib/socket-client/socket.io-1.2.0'
 
 
 export default angular.module('socket',[])
-    .service('socket',['$rootScope','apiConfig',function($rootScope,apiConfig){
+    .service('socket',['$rootScope','apiConfig','$timeout',function($rootScope,apiConfig,$timeout){
 
     if(angular.isUndefined($rootScope.isLinkedToSocket)){
         $rootScope.isLinkedToSocket = false;
@@ -65,8 +65,9 @@ export default angular.module('socket',[])
 
                 if($rootScope.isLinkedToSocket == true){
                     resolve();
+                    return;
                 }
-                console.log('还没连上socket');
+                console.log('还没连上socket'+$rootScope.isLinkedToSocket);
                 socket = io(apiConfig.im_host);
 
                 self.initListen();
@@ -94,6 +95,9 @@ export default angular.module('socket',[])
 
         //登陆
         loginIM: function(userInfo){
+            if($rootScope.isLoginIM == true){
+                return true;
+            }
             //{
             //    "alpha_id":"fhb",
             //    "nickname":"15900804441",
@@ -122,7 +126,7 @@ export default angular.module('socket',[])
                 'channel': '',//渠道
                 'latitude':''
             };
-            setTimeout(()=>{
+            $timeout(()=>{
                 console.log('正在登陆');
                 socket.emit(im.cmd_login,userInfo);
             },1000)
@@ -139,6 +143,13 @@ export default angular.module('socket',[])
         initListen:function(){
             //登陆
             socket.on(im.cmd_login,(data)=>{
+                if(data && data.err_code == 0){
+                    if(angular.isUndefined($rootScope.isLoginIM)){
+                        $rootScope.isLoginIM = true;
+                    }else{
+                        $rootScope.isLoginIM = true;
+                    }
+                }
                 $rootScope.$broadcast(im.cmd_login,data)
             })
 
