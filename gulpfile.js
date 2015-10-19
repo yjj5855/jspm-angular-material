@@ -55,15 +55,16 @@ gulp.task('public',['clean'],function(){
 
 gulp.task('jspm',['public'],function(){
     jspm.setPackagePath('.');
-    jspm.bundle('source/app','./dist/build.js',{
+    jspm.bundle('source/app','./build.js',{
         inject:true,
         sourceMaps:false,
-        minify:true,
 
     }).then(function(){
+
         gulp.src([
             './jspm_packages/system.js',
-            './config.js'
+            './config.js',
+            './build.js'
         ])
             .pipe(concat('system.min.js'))
             .pipe(uglify())
