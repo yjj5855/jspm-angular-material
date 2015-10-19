@@ -58,19 +58,20 @@ gulp.task('jspm',['public'],function(){
     jspm.bundle('source/app','./build.js',{
         inject:true,
         sourceMaps:false,
+        minify:true,
 
     }).then(function(){
+
 
         gulp.src([
             './jspm_packages/system.js',
             './config.js',
-            './build.js'
         ])
             .pipe(concat('system.min.js'))
             .pipe(uglify())
             .pipe(gulp.dest('./dist'))
 
-
+        gulp.src('./build.js').pipe(gulp.dest('./dist'));
 
         gulp.src('./public/index.html')
             .pipe(htmlreplace({
