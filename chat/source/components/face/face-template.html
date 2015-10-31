@@ -1,0 +1,13 @@
+<md-content class="h-200" >
+    <md-grid-list
+            md-cols="7"
+            md-row-height="1:1"
+            md-gutter-gt-md="16px" md-gutter-gt-sm="8px" md-gutter="4px">
+        <md-grid-tile
+                ng-repeat="face in face_list"
+                md-colspan-gt-sm="1"
+                md-rowspan-gt-sm="1">
+            <image ng-src="/chat/public/img/face/{{face.img}}" height="36px"  ng-click="click_face(face.name)"/>
+        </md-grid-tile>
+    </md-grid-list>
+</md-content>

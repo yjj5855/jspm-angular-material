@@ -14,3 +14,4 @@ demo : <a href="http://182.92.99.230">http://182.92.99.230</a>
 5.开发完成后 单入口项目 可使用 jspm bundle source/app --inject --minify 打包所有依赖(包括CSS)
 
 6.jspm unbundle 不使用打包合并的js
+
