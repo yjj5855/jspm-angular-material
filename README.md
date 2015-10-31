@@ -16,20 +16,26 @@ demo : <a href="http://182.92.99.230">http://182.92.99.230</a>
     });
 
 0.目前只有chat这个项目 前往目录
+
     cd chat
 
 1.全局安装jspm
+
     npm install jspm -g
 
 2.安装依赖包
+
     jspm install
 
 3.安装开发和构建包
+
     npm install
 
 4.构建开发项目
+
     gulp default
 
 5.开发完成后 打包项目
+
     gulp weixin
 
