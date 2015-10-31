@@ -1,7 +1,7 @@
 # jspm-angular-material
 使用jspm 快速构建 Material Design 设计模式的 angular 应用
 
-demo : <a href="http://182.92.99.230">http://182.92.99.230</a>
+示例 : <a href="http://182.92.99.230/chat/dist/weixin/index.html">请在微信中打开</a>
 
 注意:代码中没有env.js 需要自行添加到 chat/source/env.js 代码如下
 
