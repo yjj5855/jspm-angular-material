@@ -4,6 +4,7 @@
 import $ from 'jquery'
 import 'angular-route';
 import 'angular-resource'
+import 'angular-material'
 import 'source/service/ApiConfig'
 import 'source/env'
 import 'source/filter/format-message'

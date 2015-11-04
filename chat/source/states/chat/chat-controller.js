@@ -16,23 +16,34 @@ import 'source/components/btn_back/btn-back-directive'
 export default angular.module('chat')
     .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$filter',
         function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log,$filter){
+
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;
             $scope.message = value.message;
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
             $scope.user_info = value.user_info;
+
+            $scope.page = value.page;
+            $scope.timestamp = value.timestamp = new Date().getTime();
+
             $scope.toggleRight = buildToggler('right');
             $scope.showGridBottomSheet = showGridBottomSheet;
             $scope.gotoBottom = gotoBottom;
             $scope.sendMessage = sendMessage;
+            $scope.showFace = showFace;
+            $scope.hideFace = hideFace;
+            $scope.toggleAd = toggleAd;
+            $scope.is_loading_history = false;
 
+            $scope.code = getUrlVar('code');
 
 
             /**
              * 监听表情控件的输入表情事件
              */
             $scope.$on('face_inputting',face_inputting);
+
             /**
              * 监听语音输入
              */
@@ -57,7 +68,6 @@ export default angular.module('chat')
                 return debounceFn;
             }
 
-
             /**
              * 监听表情输入
              * @param event
@@ -65,15 +75,6 @@ export default angular.module('chat')
              */
             function face_inputting(event,msg){
                 $scope.message.content = value.message.content += msg;
-            }
-
-            /**
-             * 滚到底部
-             */
-            function gotoBottom(){
-                setTimeout(()=>{
-                    document.getElementById("message_box").scrollTop = document.getElementById("message_box").scrollHeight;
-                },100)
             }
 
             /**
@@ -88,40 +89,93 @@ export default angular.module('chat')
                     targetEvent: $event
                 }).then(function(clickedItem) {
 
-                    //showGridBottomSheet('','face');
-                    //$scope.open_face_status = value.open_face_status = true;
                 });
+            }
+
+            /**
+             * 滚到底部
+             */
+            function gotoBottom(){
+                $timeout(()=>{
+                    document.getElementById("message_box").scrollTop = document.getElementById("message_box").scrollHeight;
+                },100)
             }
 
             /**
              * 发送文字消息
              */
             function sendMessage(message,type){
-                let date = $filter('date')(new Date(),'yyyy-MM-dd HH:mm:ss');
-                value.msg_list.push({
-                    "id":17076,
-                    "session_id":"434-1442899152457",
-                    "msg_id":"1442899151741",
-                    "user_avatar":"",
-                    "admin_id":41,
-                    "admin_avatar":"",
-                    "from":0,
+                if(!$rootScope.isLinkedToSocket){
+                    alert('连接已断开,请重新进入页面!');
+                    return;
+                }
+
+                let time = new Date();
+                let date = $filter('date')(time,'yyyy-MM-dd HH:mm:ss');
+                let msg = {
+                    "msg_id":   time.getTime(),
+                    "from":     0,
                     "type":     type,
                     "content":  message,
-                    "push_status":1,
-                    "read_status":1,
-                    "user_nickname":"15821121693",
-                    "user_id":434,
-                    "admin_nickname":"\u6d4b\u8bd5",
-                    "admin_name":"cjl",
-                    "chat_session_id":928,
                     "created_at":   date,
-                    "updated_at":   date
-                });
+                    "updated_at":   date,
+                    "push_status"   :   false
+                };
                 if(type == 1){
                     value.message.content = '';
                 }
+                value.msg_list.push(msg);
                 $scope.gotoBottom();
+                hideFace();
+                //socketService.sendMsg(msg);
+            }
+
+            /**
+             * 显示表情
+             */
+            function showFace(){
+                $scope.open_face_status = !$scope.open_face_status;
+            }
+
+            function hideFace(){
+                $scope.open_face_status = false;
+            }
+
+            /**
+             * 显示广告
+             */
+            function toggleAd(){
+                if(angular.isUndefined($scope.openAd)){
+                    $scope.openAd = true;
+                }else{
+                    $scope.openAd = !$scope.openAd;
+                }
+
+            }
+
+            /**
+             * 获取get参数
+             * @returns {Array}
+             */
+            function getUrlVars(){
+                var vars = [], hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for(var i = 0; i < hashes.length; i++)
+                {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+                return vars;
+            }
+
+            function getUrlVar(name){
+                let value = getUrlVars()[name]
+                if((name=='code'||name=='state') && angular.isString(value)){
+                    value = value.replace('#','');
+                    value = value.replace('/','');
+                }
+                return value;
             }
 
 

@@ -33,9 +33,11 @@
 
 4.构建开发项目
 
-    gulp default
+    修改 public/index.html 中的 System.import("source/app-default 或 source/app-weixin"); 调试不同页面
 
-5.开发完成后 打包项目
+    gulp
+
+5.开发完成后 打包项目 这里只打包了一个项目
 
     gulp weixin
 
