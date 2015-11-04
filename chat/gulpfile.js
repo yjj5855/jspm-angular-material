@@ -79,3 +79,35 @@ gulp.task('weixin',['weinxinclean'],function(){
     })
 });
 
+gulp.task('appclean', function() {
+    return gulp.src(['./dist/default'], {read: false})
+        .pipe(clean({force: true}));
+})
+
+gulp.task('app',['appclean'],function(){
+    var v = new Date().getTime();
+    console.log('开始任务');
+    jspm.setPackagePath('./');
+    console.log('设置包路径');
+    jspm.bundleSFX('./source/app-default.js','./dist/default/default-'+v+'.js',{
+        sourceMaps:false,
+        minify:true
+    }).then(function(){
+        console.log('打包default.js完成');
+
+        gulp.src('./public/index.html')
+            .pipe(htmlreplace({
+                app_js:{
+                    src: null,
+                    tpl: '<script src="/chat/dist/default/default-'+v+'.js"></script>'
+                }
+            }))
+            .pipe(gulp.dest('./dist/default'))
+
+        console.log('执行成功！');
+    })
+});
+
+gulp.task('all',['app','weixin'],function(){
+
+})

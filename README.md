@@ -37,7 +37,16 @@
 
     gulp
 
-5.开发完成后 打包项目 这里只打包了一个项目
+5.开发完成后
+
+打包weixin页面
 
     gulp weixin
 
+打包default页面
+
+    gulp app
+
+打包所有页面
+
+    gulp all
