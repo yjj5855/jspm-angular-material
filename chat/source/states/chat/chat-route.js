@@ -6,7 +6,10 @@ import ChatTpl from './chat-template.html!text';
 
 var ChatRoute = {
         template    :   ChatTpl,
-        controller  :  'ChatCtrl'
+        controller  :  'ChatCtrl',
+        resolve:{
+
+        }
     };
 
 export default ChatRoute;

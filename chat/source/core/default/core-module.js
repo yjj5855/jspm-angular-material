@@ -5,12 +5,14 @@ import $ from 'jquery'
 import 'angular-route';
 import 'angular-resource'
 import 'angular-material'
+import 'angular-cookies'
 import 'source/service/ApiConfig'
 import 'source/env'
 import 'source/filter/format-message'
 import 'source/filter/format-date'
 
 import ChatModule from 'source/states/chat/chat-module'
+import LoginModule from 'source/states/login/login-module'
 import WXModule from 'source/service/WXService'
 import SocketModule from 'source/service/SocketService'
 
@@ -22,11 +24,11 @@ var CoreModule = angular.module('myApp',[
     'ngRoute',
     'ngResource',
     'ngMaterial',
-
+    'ngCookies',
     'env','apiConfig',
     WXModule.name,SocketModule.name,
     'format_msg','format_date',
-    ChatModule.name,
+    ChatModule.name,LoginModule.name,
 ])
     .config(CoreRouter)
     .controller('myAppCtrl',CoreCtrl);

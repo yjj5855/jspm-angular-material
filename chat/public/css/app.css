@@ -459,3 +459,92 @@ body{
     margin-right: 5px;
     float: right;
 }
+
+.login-padding{
+    padding: 40px;
+}
+
+
+.loginpage.ng-enter, .loginpage.ng-leave{
+    transition:0.2s linear all;
+}
+.loginpage.ng-enter {
+    -webkit-animation:fadeInLeftBig .3s 0s ease both;
+    -moz-animation:fadeInLeftBig .3s 0s ease both;
+}
+.loginpage.ng-enter.ng-enter-active, .loginpage.ng-leave {
+    transform:translateX(0%);
+}
+.loginpage.ng-leave.ng-leave-active {
+    -webkit-animation:fadeOutLeftBig .3s 0s ease both;
+    -moz-animation:fadeOutLeftBig .3s 0s ease both;
+}
+
+
+.page.ng-enter, .page.ng-leave{
+    transition:0.2s linear all;
+}
+.page.ng-enter {
+    -webkit-animation:fadeInRightBig .3s 0s ease both;
+    -moz-animation:fadeInRightBig .3s 0s ease both;
+}
+.page.ng-enter.ng-enter-active, .page.ng-leave {
+    transform:translateX(0%);
+}
+.page.ng-leave.ng-leave-active {
+    -webkit-animation:fadeOutRightBig .3s 0s ease both;
+    -moz-animation:fadeOutRightBig .3s 0s ease both;
+}
+
+/*右边淡入*/
+@-webkit-keyframes fadeInRightBig{
+    0%{opacity:0;
+        -webkit-transform:translateX(2000px)}
+    100%{opacity:1;
+        -webkit-transform:translateX(0)}
+}
+@-moz-keyframes fadeInRightBig{
+    0%{opacity:0;
+        -moz-transform:translateX(2000px)}
+    100%{opacity:1;
+        -moz-transform:translateX(0)}
+}
+/*右边淡出*/
+@-webkit-keyframes fadeOutRightBig{
+    0%{opacity:1;
+        -webkit-transform:translateX(0)}
+    100%{opacity:0;
+        -webkit-transform:translateX(2000px)}
+}
+@-moz-keyframes fadeOutRightBig{
+    0%{opacity:1;
+        -moz-transform:translateX(0)}
+    100%{opacity:0;
+        -moz-transform:translateX(2000px)}
+}
+/*左边淡入*/
+@-webkit-keyframes fadeInLeftBig{
+    0%{opacity:0;
+        -webkit-transform:translateX(-2000px)}
+    100%{opacity:1;
+        -webkit-transform:translateX(0)}
+}
+@-moz-keyframes fadeInLeftBig{
+    0%{opacity:0;
+        -moz-transform:translateX(-2000px)}
+    100%{opacity:1;
+        -moz-transform:translateX(0)}
+}
+/*左边淡出*/
+@-webkit-keyframes fadeOutLeftBig{
+    0%{opacity:1;
+        -webkit-transform:translateX(0)}
+    100%{opacity:0;
+        -webkit-transform:translateX(-2000px)}
+}
+@-moz-keyframes fadeOutLeftBig{
+    0%{opacity:1;
+        -moz-transform:translateX(0)}
+    100%{opacity:0;
+        -moz-transform:translateX(-2000px)}
+}

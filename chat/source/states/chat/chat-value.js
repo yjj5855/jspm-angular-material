@@ -3,7 +3,7 @@
  */
 
 var chatValue = {
-
+    animation_class       :   'chat-page',
     //type 1=文本 | 2=声音 | 3=图片
     message     :   {
         content :   '',

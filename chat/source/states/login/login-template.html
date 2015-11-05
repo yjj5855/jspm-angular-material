@@ -1,0 +1,15 @@
+
+<md-content class="login-padding bg-gray max-height" layout="column" layout-align="center">
+    <md-input-container class="md-icon-float" style="margin-top: 0;">
+        <label>手机</label>
+        <md-icon class="mdi mdi-24px mdi-phone md-primary"></md-icon>
+        <input type="text"/>
+    </md-input-container>
+    <md-input-container class="md-icon-float" style="margin-top: 0;">
+        <label>验证码</label>
+        <md-icon class="mdi mdi-24px mdi-verified md-accent"></md-icon>
+        <input type="text"/>
+        <md-button style="position: absolute;right: 0;top: 10px;" id="getAuthCode_btn" ng-click="getAuthCode()" class="md-button md-accent" ng-bind="auth_code_text"></md-button>
+    </md-input-container>
+    <md-button class="md-raised md-button md-primary" ng-click="webLogin()">登录</md-button>
+</md-content>

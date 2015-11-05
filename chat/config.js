@@ -17,6 +17,7 @@ System.config({
 
   map: {
     "angular": "github:angular/bower-angular@1.4.7",
+    "angular-cookies": "github:angular/bower-angular-cookies@1.4.7",
     "angular-material": "npm:angular-material@0.11.0",
     "angular-mocks": "github:angular/bower-angular-mocks@1.4.7",
     "angular-resource": "github:angular/bower-angular-resource@1.4.6",
@@ -36,6 +37,9 @@ System.config({
       "angular": "github:angular/bower-angular@1.4.7"
     },
     "github:angular/bower-angular-aria@1.4.6": {
+      "angular": "github:angular/bower-angular@1.4.7"
+    },
+    "github:angular/bower-angular-cookies@1.4.7": {
       "angular": "github:angular/bower-angular@1.4.7"
     },
     "github:angular/bower-angular-mocks@1.4.7": {
