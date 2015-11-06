@@ -23,6 +23,7 @@ function LoginCtrl($scope,$timeout,$interval,$location,$cookies){
             $scope.auth_code_text = '获取验证码';
         },60e3)
         let i = 59;
+        $scope.auth_code_text = '60秒后可再次获取';
         $interval(()=>{
             $scope.auth_code_text = i+'秒后可再次获取';
             i--;
@@ -31,7 +32,6 @@ function LoginCtrl($scope,$timeout,$interval,$location,$cookies){
     }
 
     function webLogin(){
-
         $cookies.putObject('user_login_cookie','123456',{expires: 0,'path':'/'});
         $location.path('/');
     }

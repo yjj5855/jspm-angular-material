@@ -66,7 +66,6 @@ function myAppCtrl($rootScope,$cookies,$location){
             $(el[0]).css('height',$rootScope.winheight-$rootScope.header-48+'px');
         }
         $("body").css('background','#fff');
-        $(".max-height").css('height',$rootScope.winheight+'px');
     }
 
 
