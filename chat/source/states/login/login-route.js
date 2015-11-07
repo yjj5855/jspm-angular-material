@@ -8,7 +8,9 @@ var LoginRoute = {
     template    :   LoginTpl,
     controller  :   'LoginCtrl',
     resolve:{
-        
+        changeClass:['$rootScope',function($rootScope){
+            $rootScope.pageClass = 'loginpage'
+        }]
     }
 };
 

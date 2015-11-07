@@ -8,7 +8,9 @@ var ChatRoute = {
         template    :   ChatTpl,
         controller  :  'ChatCtrl',
         resolve:{
-
+            changeClass:['$rootScope',function($rootScope){
+                $rootScope.pageClass = 'page'
+            }]
         }
     };
 

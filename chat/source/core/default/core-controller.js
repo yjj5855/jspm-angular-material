@@ -8,6 +8,7 @@ import $ from 'jquery'
 function myAppCtrl($rootScope,$cookies,$location){
 
     $rootScope.is_weixn = window.is_weixn();
+    $rootScope.pageClass = 'page';
     //判断 用户登录
     $rootScope.$on('$routeChangeStart', function(evt, next, current) {
 
@@ -41,12 +42,6 @@ function myAppCtrl($rootScope,$cookies,$location){
 
         }
     })
-    $rootScope.$on('$routeChangeSuccess', function(evt, next, current) {
-        //let p = $location.path();
-        //$rootScope.animation_class = p.replace('/','')+'page';
-    })
-
-
 
 
 
