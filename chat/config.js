@@ -16,10 +16,10 @@ System.config({
   sourceMaps: false,
 
   map: {
-    "angular": "github:angular/bower-angular@1.4.7",
-    "angular-cookies": "github:angular/bower-angular-cookies@1.4.7",
+    "angular": "github:angular/bower-angular@1.4.6",
+    "angular-cookies": "github:angular/bower-angular-cookies@1.4.6",
     "angular-material": "npm:angular-material@0.11.0",
-    "angular-mocks": "github:angular/bower-angular-mocks@1.4.7",
+    "angular-mocks": "github:angular/bower-angular-mocks@1.4.6",
     "angular-resource": "github:angular/bower-angular-resource@1.4.6",
     "angular-route": "github:angular/bower-angular-route@1.4.6",
     "babel": "npm:babel-core@5.8.25",
@@ -34,19 +34,19 @@ System.config({
     "traceur": "npm:traceur@0.0.92",
     "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.92",
     "github:angular/bower-angular-animate@1.4.6": {
-      "angular": "github:angular/bower-angular@1.4.7"
+      "angular": "github:angular/bower-angular@1.4.6"
     },
     "github:angular/bower-angular-aria@1.4.6": {
-      "angular": "github:angular/bower-angular@1.4.7"
+      "angular": "github:angular/bower-angular@1.4.6"
     },
-    "github:angular/bower-angular-cookies@1.4.7": {
-      "angular": "github:angular/bower-angular@1.4.7"
+    "github:angular/bower-angular-cookies@1.4.6": {
+      "angular": "github:angular/bower-angular@1.4.6"
     },
-    "github:angular/bower-angular-mocks@1.4.7": {
-      "angular": "github:angular/bower-angular@1.4.7"
+    "github:angular/bower-angular-mocks@1.4.6": {
+      "angular": "github:angular/bower-angular@1.4.6"
     },
     "github:angular/bower-angular-route@1.4.6": {
-      "angular": "github:angular/bower-angular@1.4.7"
+      "angular": "github:angular/bower-angular@1.4.6"
     },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
@@ -99,7 +99,7 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:angular-material@0.11.0": {
-      "angular": "github:angular/bower-angular@1.4.7",
+      "angular": "github:angular/bower-angular@1.4.6",
       "angular-animate": "github:angular/bower-angular-animate@1.4.6",
       "angular-aria": "github:angular/bower-angular-aria@1.4.6",
       "css": "github:systemjs/plugin-css@0.1.17"

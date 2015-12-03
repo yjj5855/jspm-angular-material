@@ -469,8 +469,8 @@ body{
     transition:0.2s linear all;
 }
 .loginpage.ng-enter {
-    -webkit-animation:fadeInLeftBig .5s 0s ease both;
-    -moz-animation:fadeInLeftBig .5s 0s ease both;
+    -webkit-animation:fadeInLeftBig .2s 0s ease both;
+    -moz-animation:fadeInLeftBig .2s 0s ease both;
 }
 .loginpage.ng-enter.ng-enter-active, .loginpage.ng-leave {
     position: absolute;
@@ -480,8 +480,8 @@ body{
 }
 .loginpage.ng-leave.ng-leave-active {
 
-    -webkit-animation:fadeOutLeftBig .5s 0s ease both;
-    -moz-animation:fadeOutLeftBig .5s 0s ease both;
+    -webkit-animation:fadeOutLeftBig .2s 0s ease both;
+    -moz-animation:fadeOutLeftBig .2s 0s ease both;
 }
 
 
@@ -489,8 +489,8 @@ body{
     transition:0.2s linear all;
 }
 .page.ng-enter {
-    -webkit-animation:fadeInRightBig .5s 0s ease both;
-    -moz-animation:fadeInRightBig .5s 0s ease both;
+    -webkit-animation:fadeInRightBig .2s 0s ease both;
+    -moz-animation:fadeInRightBig .2s 0s ease both;
 }
 .page.ng-enter.ng-enter-active, .page.ng-leave {
     position: absolute;
@@ -499,20 +499,20 @@ body{
     transform:translateX(0%);
 }
 .page.ng-leave.ng-leave-active {
-    -webkit-animation:fadeOutRightBig .5s 0s ease both;
-    -moz-animation:fadeOutRightBig .5s 0s ease both;
+    -webkit-animation:fadeOutRightBig .2s 0s ease both;
+    -moz-animation:fadeOutRightBig .2s 0s ease both;
 }
 
 /*右边淡入*/
 @-webkit-keyframes fadeInRightBig{
     0%{opacity:0;
-        -webkit-transform:translateX(2000px)}
+        -webkit-transform:translateX(1000px)}
     100%{opacity:1;
         -webkit-transform:translateX(0)}
 }
 @-moz-keyframes fadeInRightBig{
     0%{opacity:0;
-        -moz-transform:translateX(2000px)}
+        -moz-transform:translateX(1000px)}
     100%{opacity:1;
         -moz-transform:translateX(0)}
 }
@@ -521,24 +521,24 @@ body{
     0%{opacity:1;
         -webkit-transform:translateX(0)}
     100%{opacity:0;
-        -webkit-transform:translateX(2000px)}
+        -webkit-transform:translateX(1000px)}
 }
 @-moz-keyframes fadeOutRightBig{
     0%{opacity:1;
         -moz-transform:translateX(0)}
     100%{opacity:0;
-        -moz-transform:translateX(2000px)}
+        -moz-transform:translateX(1000px)}
 }
 /*左边淡入*/
 @-webkit-keyframes fadeInLeftBig{
     0%{opacity:0;
-        -webkit-transform:translateX(-2000px)}
+        -webkit-transform:translateX(-1000px)}
     100%{opacity:1;
         -webkit-transform:translateX(0)}
 }
 @-moz-keyframes fadeInLeftBig{
     0%{opacity:0;
-        -moz-transform:translateX(-2000px)}
+        -moz-transform:translateX(-1000px)}
     100%{opacity:1;
         -moz-transform:translateX(0)}
 }
@@ -547,11 +547,11 @@ body{
     0%{opacity:1;
         -webkit-transform:translateX(0)}
     100%{opacity:0;
-        -webkit-transform:translateX(-2000px)}
+        -webkit-transform:translateX(-1000px)}
 }
 @-moz-keyframes fadeOutLeftBig{
     0%{opacity:1;
         -moz-transform:translateX(0)}
     100%{opacity:0;
-        -moz-transform:translateX(-2000px)}
+        -moz-transform:translateX(-1000px)}
 }

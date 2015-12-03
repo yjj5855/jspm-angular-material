@@ -1,50 +1,50 @@
 {
   "jspm": {
     "dependencies": {
-      "angular": "github:angular/bower-angular@^1.4.6",
-      "angular-cookies": "github:angular/bower-angular-cookies@^1.4.7",
-      "angular-material": "npm:angular-material@^0.11.0",
-      "angular-mocks": "github:angular/bower-angular-mocks@^1.4.7",
-      "angular-resource": "github:angular/bower-angular-resource@^1.4.6",
-      "angular-route": "github:angular/bower-angular-route@^1.4.6",
-      "clean-css": "npm:clean-css@^3.4.4",
-      "css": "github:systemjs/plugin-css@^0.1.17",
-      "jquery": "npm:jquery@^2.1.4",
-      "mdi": "npm:mdi@^1.2.65",
-      "process": "github:jspm/nodelibs-process@^0.1.2",
-      "text": "github:systemjs/plugin-text@^0.0.2",
-      "traceur": "npm:traceur@^0.0.92"
+      "angular": "github:angular/bower-angular@1.4.6",
+      "angular-cookies": "github:angular/bower-angular-cookies@1.4.6",
+      "angular-material": "npm:angular-material@0.11.0",
+      "angular-mocks": "github:angular/bower-angular-mocks@1.4.6",
+      "angular-resource": "github:angular/bower-angular-resource@1.4.6",
+      "angular-route": "github:angular/bower-angular-route@1.4.6",
+      "clean-css": "npm:clean-css@3.4.4",
+      "css": "github:systemjs/plugin-css@0.1.17",
+      "jquery": "npm:jquery@2.1.4",
+      "mdi": "npm:mdi@1.2.65",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "text": "github:systemjs/plugin-text@0.0.2",
+      "traceur": "npm:traceur@0.0.92"
     },
     "devDependencies": {
-      "babel": "npm:babel-core@^5.8.24",
-      "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4",
+      "babel": "npm:babel-core@5.8.24",
+      "babel-runtime": "npm:babel-runtime@5.8.24",
+      "core-js": "npm:core-js@1.1.4",
       "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.92"
     }
   },
   "devDependencies": {
-    "browser-sync": "^2.9.6",
-    "chai": "^3.4.0",
-    "chai-as-promised": "^5.1.0",
-    "gulp": "^3.9.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-html-replace": "^1.5.1",
-    "gulp-uglify": "^1.2.0",
-    "jasmine-core": "^2.3.4",
-    "js-yaml": "^3.4.2",
-    "karma": "^0.13.14",
-    "karma-chai": "^0.1.0",
-    "karma-chai-as-promised": "^0.1.2",
-    "karma-chrome-launcher": "^0.2.1",
-    "karma-jasmine": "^0.3.6",
-    "karma-jspm": "^2.0.2",
-    "karma-mocha": "^0.2.0",
-    "karma-mocha-reporter": "^1.1.1",
-    "karma-sinon-chai": "^1.1.0",
-    "mocha": "^2.3.3"
+    "browser-sync": "2.9.6",
+    "chai": "3.4.0",
+    "chai-as-promised": "5.1.0",
+    "gulp": "3.9.0",
+    "gulp-clean": "0.3.1",
+    "gulp-concat": "2.6.0",
+    "gulp-html-replace": "1.5.1",
+    "gulp-uglify": "1.2.0",
+    "jasmine-core": "2.3.4",
+    "js-yaml": "3.4.2",
+    "karma": "0.13.14",
+    "karma-chai": "0.1.0",
+    "karma-chai-as-promised": "0.1.2",
+    "karma-chrome-launcher": "0.2.1",
+    "karma-jasmine": "0.3.6",
+    "karma-jspm": "2.0.2",
+    "karma-mocha": "0.2.0",
+    "karma-mocha-reporter": "1.1.1",
+    "karma-sinon-chai": "1.1.0",
+    "mocha": "2.3.3"
   },
   "dependencies": {
-    "jspm": "^0.16.13"
+    "jspm": "0.16.13"
   }
 }

@@ -60,7 +60,7 @@ function myAppCtrl($rootScope,$cookies,$location){
             $rootScope.header = $rootScope.is_weixn?0:56;
             $(el[0]).css('height',$rootScope.winheight-$rootScope.header-48+'px');
         }
-        $("body").css('background','#fff');
+        $("body").css('background','#f1f1f1');
     }
 
 
