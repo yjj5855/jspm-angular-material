@@ -5,9 +5,28 @@
 import $ from 'jquery'
 
 
-function myAppCtrl($rootScope,$cookies,$location){
+function myAppCtrl($rootScope,$timeout,$cookies){
 
     $rootScope.is_weixn = window.is_weixn();
+    $rootScope.isAndroid = navigator.userAgent.match(/Android/i) ? true: false;
+    $rootScope.isBlackBerry = navigator.userAgent.match(/BlackBerry/i) ? true: false;
+    $rootScope.isiPhone = navigator.userAgent.match(/iPhone/i) ? true: false;
+    $rootScope.isWindows = navigator.userAgent.match(/IEMobile/i) ? true: false;
+    $rootScope.autoSetMessageBoxHeight = autoSetMessageBoxHeight;
+
+    getSysVersion();//获取系统版本
+
+    //页面加载完成后自适应屏幕
+    $rootScope.$on('$viewContentLoaded', function() {
+        $timeout(()=>{
+            autoSetMessageBoxHeight()
+        },1e1)
+    });
+    $(window).resize(function(){
+        autoSetMessageBoxHeight();
+    })
+
+
     $rootScope.pageClass = 'page';
     //判断 用户登录
     $rootScope.$on('$routeChangeStart', function(evt, next, current) {
@@ -42,30 +61,43 @@ function myAppCtrl($rootScope,$cookies,$location){
 
         }
     })
-
-
-
-    $rootScope.$on('$viewContentLoaded', function() {
-        autoSetMessageBoxHeight();
-    });
-    $(window).resize(function(){
-        autoSetMessageBoxHeight();
-    })
+////////////////////////////////////
 
     function autoSetMessageBoxHeight(){
         var el = $("#message_box");
         if(el.length == 1){
             $rootScope.winheight= $(window).height();
             $rootScope.winwidth = $(window).width();
-            $rootScope.header = $rootScope.is_weixn?0:56;
-            $(el[0]).css('height',$rootScope.winheight-$rootScope.header-48+'px');
+            $rootScope.header = $("#cm-header").height();
+            $rootScope.topToolbar = $("md-toolbar:first").height();
+            $rootScope.bottom = 49;
+            $(el[0]).css('height',$rootScope.winheight-$rootScope.header-$rootScope.topToolbar-$rootScope.bottom+'px');
+
+            $("#message_input").css('width',$rootScope.winwidth-48-48-13);
         }
         $("body").css('background','#f1f1f1');
     }
 
+    function getSysVersion(){
+        if($rootScope.isAndroid){
+            var str = navigator.userAgent.match(/Android ([\d.]+)/);
+            for(let i=0;i<str.length;i++){
+                if(parseFloat(str[i])>0){
+                    $rootScope.sys_version = parseFloat(str[i]);
+                }
+            }
+        }else if($rootScope.isiPhone){
+            var str = navigator.userAgent.match(/iPhone OS ([\d_]+) /);
+            for(let i=0;i<str.length;i++){
+                if(parseFloat(str[i])>0){
+                    $rootScope.sys_version = parseFloat(str[i]);
+                }
+            }
+        }
+    }
 
 }
 
-myAppCtrl.$inject = ['$rootScope','$cookies','$location'];
+myAppCtrl.$inject = ['$rootScope','$timeout','$cookies'];
 
 export default myAppCtrl;

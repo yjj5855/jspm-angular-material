@@ -1,10 +1,10 @@
-<md-toolbar class="md-accent">
+<md-toolbar class="md-accent" ng-if="showTopToolBar">
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" cm-back-btn aria-label="返回">
             <md-icon class="mdi mdi-24px mdi-arrow-left"></md-icon>
         </md-button>
         <h2>
-            <span class="md-accent" ng-bind="service_info.name"></span>
+            <span class="md-accent">车知了-在线问答</span>
         </h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="toggleRight()" aria-label="技师信息">
@@ -12,32 +12,39 @@
         </md-button>
     </div>
 </md-toolbar>
+<div class="cm-toolbar bg-gray" style="height: 56px;position: relative;overflow: hidden;" id="cm-header" ng-if="!showTopToolBar">
+    <p class="tc top-text">
+        车知了,用车问题即时解答</p>
+    <p class="tc top-text" style="padding-top: 5px;">
+        <span>在线时间 08:00-24:00</span>
+    </p>
+</div>
 <md-content layout="column">
     <md-content flex md-scroll-y class="bg-gray"  id="message_box">
+        <div class="tc c-gray cm-padding" ng-click="loadHistoryMsg()" ng-if="page > 0 && !is_loading_history">点击获取聊天记录</div>
+        <div class="tc c-gray cm-padding" ng-if="page == 0">没有聊天记录了</div>
 
-        <div class="direct-chat-messages">
+        <div flex class="direct-chat-messages direct-chat-success">
             <div ng-repeat="msg in msg_list">
                     <!-- 客服的气泡-->
-                    <div class="direct-chat-msg" ng-if="msg.from == 1">
+                    <div class="direct-chat-msg" ng-if="msg.from == 1 && msg.type <= 3">
                         <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at}}</span>
-                            <p class="direct-chat-name">{{msg.admin_name}}</p>
+                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
                         </div>
 
                         <img class="direct-chat-img" ng-src="{{service_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text" ng-bind-html="msg.content|format_msg:msg.type">
+                        <div class="direct-chat-text" ng-click="preview(msg.content,msg.type)" ng-bind-html="msg.content|format_msg:msg.type">
 
                         </div>
                     </div>
 
                     <!-- 用户的气泡-->
-                    <div class="direct-chat-msg right" ng-if="msg.from == 0">
+                    <div class="direct-chat-msg right" ng-if="msg.from == 0 && msg.type <= 3">
                         <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at}}</span>
-                            <p class="direct-chat-name right">{{msg.user_nickname}}</p>
+                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
                         </div>
                         <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text" ng-bind-html="msg.content|format_msg:msg.type">
+                        <div class="direct-chat-text" ng-click="preview(msg.content,msg.type)" ng-bind-html="msg.content|format_msg:msg.type">
 
                         </div>
                     </div>
@@ -47,52 +54,56 @@
     </md-content>
 
     <!-- 底部输入框-->
-    <md-content layout="row" style="min-height: 48px;">
+    <md-content layout="row" class="cm-bottom-toolbar bg-gray" style="height: 49px;overflow-y: hidden;">
 
         <!-- 语音按钮-->
-        <cm-audio-btn ng-model="open_audio_status">
-            <md-button class="md-icon-button mg_0" ng-class="{'md-accent':open_audio_status==true}"  aria-label="聊天语音">
-                <md-icon class="mdi mdi-24px mdi-microphone c-green" class="name"></md-icon>
-            </md-button>
-        </cm-audio-btn>
+        <!--<cm-audio-btn ng-model="open_audio_status">-->
+            <!--<md-button class="md-icon-button mg_0" ng-class="{'md-accent':open_audio_status==true}"  aria-label="聊天语音">-->
+                <!--<md-icon class="mdi mdi-24px mdi-microphone" class="name"></md-icon>-->
+            <!--</md-button>-->
+        <!--</cm-audio-btn>-->
 
         <!-- 语音输入按钮-->
-        <cm-audio-input-btn flex ng-show="open_audio_status == true">
-            <md-button flex ng-show="open_audio_status == true" style="width: 100%;margin-left: 0;margin-right: 0;">
-                按住  说话
-            </md-button>
-        </cm-audio-input-btn>
-
-
-        <md-input-container flex class="md-padding" ng-show="open_audio_status == false">
-            <input ng-model="message.content" type="text" id="message_input" ng-focus="open_face_status=false" aria-label="聊天文字">
-        </md-input-container>
+        <!--<cm-audio-input-btn flex ng-show="open_audio_status == true">-->
+            <!--<md-button flex ng-show="open_audio_status == true" style="width: 100%;margin-left: 0;margin-right: 0;">-->
+                <!--按住  说话-->
+            <!--</md-button>-->
+        <!--</cm-audio-input-btn>-->
 
         <!-- 表情按钮-->
-        <md-button class="md-icon-button mg_0" ng-hide="open_audio_status == true" ng-class="{'md-accent':open_face_status==true}" ng-click="open_face_status = !open_face_status" aria-label="聊天表情">
-            <md-icon class="mdi mdi-24px mdi-emoticon c-green" class="name"></md-icon>
+        <md-button class="md-icon-button mg_0" ng-hide="open_audio_status == true" ng-class="{'md-accent':open_face_status==true}" ng-click="toggleFace()" aria-label="聊天表情">
+            <md-icon class="mdi mdi-24px mdi-emoticon" class="name"></md-icon>
         </md-button>
+
+        <!--聊天输入框-->
+        <div class="cm-padding inline" flex style="padding-left: 0;padding-right: 0;" ng-show="open_audio_status == false">
+            <input class="cm-input chat-input inline border-0" type="text" id="message_input"
+                   ng-model="message.content"  ng-focus="toggleFace(false)" flex="100"
+                   ng-keypress="keypressInChatInput($event)" aria-label="聊天文字">
+        </div>
 
         <!-- 发送按钮-->
         <md-button class="md-icon-button mg_0" ng-click="sendMessage(message.content,1)"  ng-class="{'md-accent':message.content.trim()!=''}" style="" ng-if="message.content !='' && open_audio_status != true" aria-label="发送信息">
             <md-icon class="mdi mdi-24px mdi-send" class="name"></md-icon>
         </md-button>
 
+        <div ng-if="showMoreBtn != false">
         <!-- +号按钮-->
         <md-button class="md-icon-button mg_0" ng-if="message.content ==''||open_audio_status == true" aria-label="发送其他类型的信息"
                 ng-click="showGridBottomSheet($event)">
-            <md-icon class="mdi mdi-24px mdi-plus-circle-outline c-green" class="name"></md-icon>
+            <md-icon class="mdi mdi-24px mdi-plus-circle-outline" class="name"></md-icon>
         </md-button>
+        </div>
     </md-content>
 
-    <face class="h-200" flex ng-show="open_face_status==true">
+    <face class="h-200" ng-show="open_face_status==true">
 
     </face>
 </md-content>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
     <md-toolbar class="md-accent">
-        <h1 class="md-toolbar-tools">{{service_info.name}}的资料</h1>
+        <h1 class="md-toolbar-tools">技师资料</h1>
     </md-toolbar>
     <md-content  layout-padding layout-align="center center">
         <div style="text-align: center;">
@@ -101,7 +112,7 @@
 
         <form>
             <md-input-container>
-                <label for="service_infoName">姓名</label>
+                <label for="service_infoName">名称</label>
                 <input type="text" id="service_infoName"
                        ng-model="service_info.name" readonly>
             </md-input-container>

@@ -1,29 +1,24 @@
-<div class="cm-toolbar md-accent" id="cm-header" ng-if="!is_weixn">
-    <div class="cm-toolbar-tools">
-        <button class="cm-button cm-icon-button" cm-back-btn aria-label="返回">
-            <i class="cm-icon mdi mdi-24px mdi-arrow-left"></i>
-        </button>
+<div class="cm-toolbar bg-gray" style="height: 56px;position: relative;overflow: hidden;" id="cm-header">
+    <p class="tc top-text">
+        选车用车养车,专业技师,即时解答</p>
+    <p class="tc top-text" style="padding-top: 5px;">
+        <span>在线时间 08:00-24:00</span>
 
-        <span style="position: absolute;margin-top: 16px;" class="md-accent" ng-bind="service_info.name"></span>
-
-        <button class="cm-button cm-icon-button" ng-click="toggleRight()" style="float: right;" aria-label="技师信息">
-            <i class="cm-icon mdi mdi-24px mdi-account"></i>
-        </button>
-    </div>
+    </p>
 </div>
-<div>
+<div style="position: relative;" ng-click="openAd = false">
+    <!--<img src="/chat/public/img/fenge.png" width="100%" height="1px" style="position: absolute;">-->
     <div class="cm-box bg-gray" id="message_box">
-
         <div class="tc c-gray cm-padding" ng-click="loadHistoryMsg()" ng-if="page > 0 && !is_loading_history">点击获取聊天记录</div>
         <div class="tc c-gray cm-padding" ng-if="page == 0">没有聊天记录了</div>
 
 
-        <div class="direct-chat-messages">
+        <div class="direct-chat-messages direct-chat-success">
             <div ng-repeat="msg in msg_list">
                     <!-- 客服的气泡-->
-                    <div class="direct-chat-msg" ng-if="msg.from == 1">
-                        <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
+                    <div class="direct-chat-msg" ng-if="msg.from == 1 && msg.type <= 3">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-timestamp">{{msg.created_at|format_date}}</span>
                             <!--<p class="direct-chat-name">{{msg.admin_name}}</p>-->
                         </div>
 
@@ -34,13 +29,13 @@
                     </div>
 
                     <!-- 用户的气泡-->
-                    <div class="direct-chat-msg right" ng-if="msg.from == 0">
+                    <div class="direct-chat-msg right" ng-if="msg.from == 0 && msg.type <= 3">
                         <div class="direct-chat-info clearfix">
                             <span class="direct-chat-timestamp">{{msg.created_at|format_date}}</span>
                             <!--<p class="direct-chat-name right">{{msg.user_nickname}}</p>-->
                         </div>
                         <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text" ng-bind-html="msg.content|format_msg:msg.type">
+                        <div class="direct-chat-text" ng-click="preview(msg.content,msg.type)" ng-bind-html="msg.content|format_msg:msg.type">
 
                         </div>
                         <img class="direct-chat-loading" src="/chat/public/img/msg_loading.gif" ng-if="msg.push_status == 0"/>
@@ -53,33 +48,35 @@
 
 
 <!-- 底部输入框-->
-<div style="min-height: 48px;width: 100%;">
+<div class="cm-bottom-toolbar bg-gray">
 
     <!-- 语音按钮-->
-    <div class="inline" ng-click="toggleAd()">
-        <button class="cm-button cm-icon-button mg_0" ng-class="{'md-accent':open_audio_status==true}"  aria-label="聊天语音" disabled>
-            <i class="cm-icon mdi mdi-24px mdi-microphone c-green"></i>
+    <div class="inline">
+        <button class="cm-button cm-icon-button mg_0" ng-class="{'md-accent':open_audio_status==true}"  aria-label="聊天语音"
+            ng-click="toggleAd()">
+            <i class="cm-icon mdi mdi-24px mdi-microphone c-gray"></i>
         </button>
     </div>
 
-    <div class="cm-padding inline" style="padding-left: 0;" ng-show="open_audio_status == false" id="message_input_box">
-        <input class="cm-input inline" ng-model="message.content" type="text" id="message_input" ng-focus="hideFace()" aria-label="聊天文字">
+    <!--聊天输入框-->
+    <div class="cm-padding chat-input inline" style="padding-left: 0;padding-right: 0;" ng-show="open_audio_status == false" id="message_input_box">
+        <input class="cm-input inline border-0" ng-model="message.content" type="text" id="message_input" ng-focus="hideFace()" ng-keypress="keypressInChatInput($event)" aria-label="聊天文字">
     </div>
 
     <!-- 表情按钮-->
     <button class="cm-button cm-icon-button mg_0" ng-class="{'md-accent':open_face_status==true}" ng-click="showFace()" aria-label="聊天表情">
-        <i class="cm-icon mdi mdi-24px mdi-emoticon c-green"></i>
+        <i class="cm-icon mdi mdi-24px mdi-emoticon c-gray"></i>
     </button>
 
     <!-- 发送按钮-->
     <button class="cm-button cm-icon-button mg_0" ng-show="message.content !='' " ng-click="sendMessage(message.content,1)"  ng-class="{'md-accent':message.content.trim()!=''}"  style="transition: none;">
-        <i class="cm-icon mdi mdi-24px mdi-send"></i>
+        <i class="cm-icon mdi mdi-24px mdi-send c-green"></i>
     </button>
 
     <!-- +号按钮-->
     <button class="cm-button cm-icon-button mg_0" ng-show="message.content ==''" aria-label="发送其他类型的信息" style="transition: none;"
-               ng-click="toggleAd()">
-        <i class="cm-icon mdi mdi-24px mdi-plus-circle-outline"></i>
+        ng-click="toggleAd()">
+        <i class="cm-icon mdi mdi-24px mdi-plus-circle-outline c-gray"></i>
     </button>
 </div>
 
@@ -90,10 +87,7 @@
 <div class="tuigunang-box" ng-show="openAd ==  true">
     <div style="position: relative;">
         <a style="color: #fff!important;" href="http://www.chezhil.com/doapp.html?type=weixin_im">
-            <p style="text-align: center;">下载车知了APP，了解更多用车问题！</p>
+            <img src="/chat/public/img/download.png" width="100%">
         </a>
-        <button class="cm-button cm-icon-button mg_0" ng-click="openAd = false" style="position: absolute;right: 12px;top:-12px;">
-            <i class="cm-icon mdi mdi-24px mdi-close-circle-outline"></i>
-        </button>
     </div>
 </div>

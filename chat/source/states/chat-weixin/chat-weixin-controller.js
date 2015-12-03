@@ -16,7 +16,7 @@ export default angular.module('chat')
     .controller('ChatWeiXinCtrl',['$rootScope','$scope','$routeParams','$timeout','$window','chat.value','$log','$filter','wxService','socket','User','$location','apiConfig',
         function($rootScope,$scope,$routeParams,$timeout,$window,value,$log,$filter,wxService,socketService,UserService,$location,apiConfig){
             var from = getUrlVar('state');
-            var share_link = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+apiConfig.app_id+'&redirect_uri=http%3A%2F%2F'+apiConfig.app_host+'%2Fchat%2Fdist%2Fweixin%2Findex.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+            var share_link = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='+apiConfig.app_id+'&redirect_uri=http%3A%2F%2F'+apiConfig.app_host+'%2Fchat%2Fdist%2Fweixin%2Findex.html&response_type=code&scope=snsapi_userinfo&state='+from+'#wechat_redirect';
 
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;
@@ -34,8 +34,9 @@ export default angular.module('chat')
             $scope.hideFace = hideFace;
             $scope.toggleAd = toggleAd;
             $scope.loadHistoryMsg = loadHistoryMsg;
-            $scope.is_loading_history = false;
+            $scope.is_loading_history = true;
             $scope.preview = preview;
+            $scope.keypressInChatInput = keypressInChatInput;
 
             $scope.code = getUrlVar('code');
 
@@ -74,11 +75,11 @@ export default angular.module('chat')
                                         'client_type': 3,
                                         'client_id':'',
                                         'client_ver':'1.0.0',
-                                        'channel': 'czl_weixin',//渠道
+                                        'channel': $scope.userInfo.channel_sign,//渠道
                                         'latitude':angular.isDefined(wxService.latitude)?wxService.latitude:''
                                     }
                                     socketService.loginIM($rootScope.loginInfo);
-                                    value.user_info.avatar = data.data.user_avatar;
+                                    data.data.user_avatar !=''?value.user_info.avatar = data.data.user_avatar:'';
                                     value.user_info.name = $scope.userInfo.nickname;
                                     $rootScope.$apply('user_info');
                                 },
@@ -99,6 +100,53 @@ export default angular.module('chat')
             }else if(angular.isUndefined($scope.code)){
                 console.log('授权失败!');
                 window.location.href = share_link;
+
+                //获取用户信息后 登陆IM
+                //socketService.connect().then(
+                //    function(){
+                //        $scope.userInfo = {
+                //            address: "",
+                //            alpha_id: "Gsj",
+                //            answer_number: 0,
+                //            appoint_number: 0,
+                //            car_number: "",
+                //            car_type_name: "",
+                //            gender: 1,
+                //            gender_str: "男",
+                //            nickname: "杨佳军",
+                //            realname: "",
+                //            telephone: "",
+                //            channel_sign:'czl_weixin',
+                //            user_allow_login: true,
+                //            user_avatar: "http://wx.qlogo.cn/mmopen/wJibWkqN1bUO2ozCTUD2e0k9AIsot7OdRLPt9UbRyaFa4I6cvaqXWyUrczoZn5gkOSngAJKWj8JAicRibZV6SVr9xjYPLqZ7qUZ/0",
+                //            user_id: 35754,
+                //            user_token: "9vEqDHX9wZo/Gz4Gpc2lmw==",
+                //        }
+                //
+                //        $rootScope.loginInfo = {
+                //            'uin': $scope.userInfo.user_id,
+                //            'nick':$scope.userInfo.nickname,
+                //            'pic': $scope.userInfo.user_avatar,
+                //            'location':'',
+                //            'address':'',
+                //            'token':$scope.userInfo.user_token,
+                //            'client_type': 3,
+                //            'client_id':'',
+                //            'client_ver':'1.0.0',
+                //            'channel': $scope.userInfo.channel_sign,//渠道
+                //            'latitude':angular.isDefined(wxService.latitude)?wxService.latitude:''
+                //        }
+                //        socketService.loginIM($rootScope.loginInfo);
+                //        value.user_info.avatar = $scope.userInfo.user_avatar;
+                //        value.user_info.name = $scope.userInfo.nickname;
+                //        $rootScope.$apply('user_info');
+                //    },
+                //    function(){
+                //        $rootScope.isLinkedToSocket = false;
+                //        alert('连接断开');
+                //        console.log('连接断开');
+                //    }
+                //)
             }
 
             $scope.$on(socketService.im.cmd_login,function(event,data){
@@ -107,6 +155,15 @@ export default angular.module('chat')
                 //$timeout(()=>{
                 //    socketService.inChatWindow();
                 //},1000);
+                let msg_id = new Date().getTime();
+                value.msg_list.push({
+                    "msg_id":   msg_id,
+                    "from":     1,
+                    "type":     1,
+                    "content":  '您好,想了解汽车哪方面内容呢?',
+                    "created_at":   msg_id,
+                    "updated_at":   msg_id
+                });
                 //获取用户聊天记录
                 loadHistoryMsg();
             });
@@ -145,7 +202,9 @@ export default angular.module('chat')
                 console.log(msg);
                 for(let i=value.msg_list.length-1;i>=0;i--){
                     if(msg.msg_id == value.msg_list[i].msg_id){
-                        value.msg_list[i].push_status = true;
+                        $rootScope.$apply(function(){
+                            value.msg_list[i].push_status = true;
+                        })
                         break;
                     }
                 }
@@ -157,6 +216,16 @@ export default angular.module('chat')
             $scope.$on('face_inputting',face_inputting);
 
 
+            //绑定回车按键
+            function keypressInChatInput($event){
+                if($scope.message.content.trim() != '' && $event.keyCode==13 && $event.altKey == false && $event.ctrlKey==false && $event.shiftKey==false ){
+                    $event.preventDefault();
+                    $event.stopPropagation();
+                    $scope.sendMessage($scope.message.content,1);
+                    return;
+                }
+            }
+
             /**
              * 只是上拉加载聊天历史
              */
@@ -167,8 +236,8 @@ export default angular.module('chat')
                     user_id : $scope.userInfo.user_id,
                     alpha_id : $scope.userInfo.alpha_id
                 };
+                $scope.is_loading_history = true;
                 return new Promise(function(){
-                    $scope.is_loading_history = true;
                     UserService.getHistoryMsg(prams).$promise.then(
                         function(data){
                             if(data.data.length==0){
@@ -187,7 +256,10 @@ export default angular.module('chat')
                             value.page++;
                             $scope.is_loading_history = false;
                         }
-                    );
+                    ).catch(function(){
+                        console.log("获取聊天记录失败");
+                        $scope.is_loading_history = false;
+                    });
                 })
 
             }
@@ -208,7 +280,7 @@ export default angular.module('chat')
              * @param msg
              */
             function face_inputting(event,msg){
-                $scope.message.content = value.message.content += msg;
+                value.message.content += msg.face_name;
             }
 
             /**
@@ -256,31 +328,30 @@ export default angular.module('chat')
                 $scope.open_face_status = !$scope.open_face_status;
                 var el = $("#message_box");
                 if($scope.open_face_status){
-                    $(el[0]).css('min-height',$rootScope.winheight-$rootScope.header-48-200);
-                    $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48-200);
+                    $(el[0]).css('height',$rootScope.winheight-$rootScope.header-$rootScope.bottom-200);
+                    gotoBottom();
                 }else{
-                    $(el[0]).css('min-height',$rootScope.winheight-$rootScope.header-48);
-                    $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
+                    $(el[0]).css('height',$rootScope.winheight-$rootScope.header-$rootScope.bottom);
                 }
             }
 
             function hideFace(){
                 $scope.open_face_status = false;
                 var el = $("#message_box");
-                $(el[0]).css('min-height',$rootScope.winheight-$rootScope.header-48);
-                $(el[0]).css('max-height',$rootScope.winheight-$rootScope.header-48);
+                $(el[0]).css('height',$rootScope.winheight-$rootScope.header-$rootScope.bottom);
             }
 
             /**
              * 显示广告
              */
             function toggleAd(){
-                if(angular.isUndefined($scope.openAd)){
-                    $scope.openAd = true;
-                }else{
-                    $scope.openAd = !$scope.openAd;
+                if($scope.userInfo.channel_sign == 'czl_weixin'){
+                    if(angular.isUndefined($scope.openAd)){
+                        $scope.openAd = true;
+                    }else{
+                        $scope.openAd = !$scope.openAd;
+                    }
                 }
-
             }
 
             /**

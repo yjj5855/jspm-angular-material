@@ -76,7 +76,7 @@ angular.module('format_msg',[])
                     text = '<audio controls="controls" src="'+text+'"></audio>';
                     break;
                 case '3'://图片
-                    text = '<image src="'+text+'!dengbisuofang" width="auto">';
+                    text = '<img src="'+text+'!dengbisuofang" width="auto"/>';
                     break;
                 case '4'://用户分享行为
                     text = text.toString();

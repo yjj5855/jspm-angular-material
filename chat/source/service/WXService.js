@@ -23,11 +23,7 @@ export default angular.module('WX',[])
         weixin.init = setWXShare;
 
         function setWXShare(data,wxUserInfo) {
-            //var userInfo = wxUserInfo;
-            //tar.config({
-            //    tar_token:"ULAn%2FVv0R65JjlmzK6Di7FaCHYQg8oA",   //必填，监测系统分配给此次监测活动的token
-            //    tar_tid: "101527"    //必填，监测系统分配给此次监测活动的id
-            //},[userInfo]);
+            
 
             var shareText = {
                 title: data.title,

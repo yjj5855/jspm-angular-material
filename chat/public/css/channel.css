@@ -1,0 +1,15 @@
+/*2015-12-02 乐车帮 样式*/
+.czl_lechebang .md-button.md-accent{
+    color: #888 !important;
+}
+.czl_lechebang .md-button.md-accent md-icon{
+    color: #888 !important;
+}
+.czl_lechebang md-toolbar.md-accent{
+    background-color: #888 !important;
+    color: rgb(255,255,255) !important;
+}
+.czl_lechebang .direct-chat-img{
+    border-radius: 5px;
+}
+/*乐车帮 样式 [结束]*/

@@ -2,7 +2,6 @@
  * Created by yangjiajun on 15/9/30.
  */
 
-import FaceTemplate from './face-template.html!text'
 import FaceWeiXinTemplate from './face-weixin-template.html!text'
 
 export default angular.module('chat')
@@ -13,7 +12,7 @@ export default angular.module('chat')
             transclude:true,
             scope:{
             },
-            template: $rootScope.is_weixn?FaceWeiXinTemplate:FaceTemplate,
+            template: FaceWeiXinTemplate,
             link : function(scope, element, attrs){
                 scope.face_list = [
 
@@ -64,10 +63,9 @@ export default angular.module('chat')
                 ];
                 scope.click_face = click_face;
 
-
                 function click_face(face_name){
-                    scope.$emit('face_inputting',face_name);
+                    $rootScope.$broadcast('face_inputting',{face_name:face_name});
                 }
-            }
+            },
         }
     }])

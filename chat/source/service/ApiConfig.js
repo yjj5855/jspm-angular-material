@@ -31,6 +31,11 @@ export default angular.module('apiConfig',[])
             im_host:im_host,
 
             app_id:app_id,
-            app_host:app_host
+            app_host:app_host,
+
+            qiniu_qa_host:'http://7xkkt4.com2.z0.glb.qiniucdn.com/',
+            qiniu_im_host:'http://7xkz66.com2.z0.glb.qiniucdn.com/',
+            qiniu_wiki_host:'http://7xkz65.com2.z0.glb.qiniucdn.com/',
+            qiniu_avatar_host:'http://7xl1vx.com2.z0.glb.qiniucdn.com/',
         }
     }]);

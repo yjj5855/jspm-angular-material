@@ -31,6 +31,8 @@ export default angular.module('socket',[])
 
         cmd_kick_user:  'CMD_USER_KICK_USER_NOTIFY',//相同用户踢掉通知
 
+        cmd_chat_msg_notify :  'CMD_USER_CHAT_MSG_NOTIFY',//客服消息收到通知IM服务器
+
     };
     return {
         im : im,
@@ -86,6 +88,7 @@ export default angular.module('socket',[])
                     $rootScope.isLoginIM = false;
                     $rootScope.$apply();
                     this.close();
+                    alert('连接断开,请刷新浏览器重试');
                     console.error("socket连接断开");
                     //重连socket
                     self.connect();
@@ -154,6 +157,13 @@ export default angular.module('socket',[])
             //接收到消息
             socket.on(im.cmd_chat_msg,(msg)=>{
                 $rootScope.$broadcast(im.cmd_chat_msg,msg);
+                let time = new Date().getTime();
+                socket.emit(im.cmd_chat_msg_notify,{
+                    msg_id      :   msg.msg_id,
+                    push_status :   1,
+                    read_status :   1,
+                    create_time :   time
+                })
             });
             //发送消息的反馈
             socket.on(im.cmd_chat_msg_ask,(ask)=>{

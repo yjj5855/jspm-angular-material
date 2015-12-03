@@ -29,7 +29,7 @@
 
 <body layout="column"  ng-controller="myAppCtrl" style="margin: 0!important;background:url('/chat/public/img/car_loading2.gif') 50% 200px no-repeat,#DADADA;">
 
-    <md-content ng-class="{page:pageClass == 'page',loginpage:pageClass == 'loginpage'}" layout="column" ng-view></md-content>
+    <div class="{{channel_sign}}" ng-class="{page:pageClass == 'page',loginpage:pageClass == 'loginpage'}" layout="column" ng-view></div>
 
 </body>
 </html>

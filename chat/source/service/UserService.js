@@ -14,6 +14,7 @@ export default
     .service('User',['$rootScope','$http','$resource','apiConfig',
         function($rootScope,$http,$resource,apiConfig){
             var wechat_host = apiConfig.wx_host;
+            let mobile_host = apiConfig.mobile_host;
 
             return $resource(wechat_host+'callback/userinfobycode',{},{
                 getUserInfoByCode:{
@@ -25,7 +26,10 @@ export default
                     url:wechat_host+'user/historymsg',
                     method:'GET',
                     params: apiConfig.authParams,
+                },
+                getUserInfoByThirdApp:{
+                    url:mobile_host+'passport/login',
+                    method:'POST',
                 }
-
             });
         }]);

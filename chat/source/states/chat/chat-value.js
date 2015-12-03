@@ -3,7 +3,7 @@
  */
 
 var chatValue = {
-    animation_class       :   'chat-page',
+
     //type 1=文本 | 2=声音 | 3=图片
     message     :   {
         content :   '',
@@ -19,6 +19,9 @@ var chatValue = {
         name    :   'admin',
         avatar  :   '/chat/public/img/default_service.png'
     },
+    page        :   1,
+    page_size   :   10,
+    timestamp   :   '',
     msg_list    :   []
 };
 
