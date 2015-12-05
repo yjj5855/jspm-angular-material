@@ -22,7 +22,12 @@ var chatValue = {
     page        :   1,
     page_size   :   10,
     timestamp   :   '',
-    msg_list    :   []
+    msg_list    :   [],
+    is_loading_history : true,
+    userInfo    :   {},
+    showTopToolBar : false,
+    showTopTitle :  false,
+    scroll_top   :   0,
 };
 
 export default angular.module('chat').value('chat.value',chatValue);

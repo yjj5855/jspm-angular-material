@@ -13,6 +13,7 @@ function SendOtherMessageCtrl($scope, $mdBottomSheet,$rootScope,apiConfig,Upload
 
         var start = function (index) {
             $mdBottomSheet.hide();
+            $rootScope.hide_http_loading = true;
             $mdToast.show({
                 controller: UploadToastCtrl,
                 template: UploadToast,
@@ -31,9 +32,11 @@ function SendOtherMessageCtrl($scope, $mdBottomSheet,$rootScope,apiConfig,Upload
                 var img_url = qiniu_im_host+response.key;
                 $rootScope.$broadcast('img_upload_success',{img_url:img_url});
                 $scope.selectFiles.splice(index,1);
+                $rootScope.hide_http_loading = false;
             }, function (response) {
                 //toaster.pop('error','上传失败!');
                 $scope.selectFiles.splice(index,1);
+                $rootScope.hide_http_loading = false;
             }, function (evt) {
                 $mdToast.updateContent(Math.floor(100 * evt.loaded / evt.totalSize));
             });
@@ -58,7 +61,8 @@ function SendOtherMessageCtrl($scope, $mdBottomSheet,$rootScope,apiConfig,Upload
             $scope.getUpToken().then(function(){
                 for (var i = 0; i < $files.length; i++) {
                     if(!($files[i].type == 'image/png' || $files[i].type == 'image/jpg' || $files[i].type == 'image/jpeg')){
-                        //toaster.pop('info',$files[i].name+'不是图片类型,不能上传!');
+                        $rootScope.errorDialog("只支持jpg,jpeg,png格式!");
+                        $mdBottomSheet.hide();
                         continue;
                     }
                     $scope.selectFiles[i + offsetx] = {

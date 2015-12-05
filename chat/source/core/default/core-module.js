@@ -13,8 +13,10 @@ import 'source/filter/format-message'
 import 'source/filter/format-date'
 import 'source/filter/format-user-avatar'
 
+import 'source/components/loading/http-loading'
+
 import ChatModule from 'source/states/chat/chat-module'
-import LoginModule from 'source/states/login/login-module'
+import PreviewModule from 'source/states/preview/preview-module'
 
 import SocketModule from 'source/service/SocketService'
 import UserModule from 'source/service/UserService'
@@ -29,11 +31,11 @@ var CoreModule = angular.module('myApp',[
     'ngResource',
     'ngMaterial',
     'ngCookies',
-    'LocalStorageModule','angularQFileUpload',
+    'LocalStorageModule','angularQFileUpload','loading',
     'env','apiConfig',
     SocketModule.name,UserModule.name,UploadModule.name,
     'format_msg','format_date','format_avatar',
-    ChatModule.name,LoginModule.name,
+    ChatModule.name,PreviewModule.name,
 ])
     .config(CoreRouter)
     .controller('myAppCtrl',CoreCtrl);

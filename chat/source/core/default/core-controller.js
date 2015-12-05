@@ -4,8 +4,10 @@
 
 import $ from 'jquery'
 
+import ErrorDialogCtrl from 'source/states/chat/dialog/error-dialog-controller';
+import ErrorDialogHtml from 'source/states/chat/dialog/error-dialog-template.html!text'
 
-function myAppCtrl($rootScope,$timeout,$cookies){
+function myAppCtrl($rootScope,$timeout,$mdDialog,$scope){
 
     $rootScope.is_weixn = window.is_weixn();
     $rootScope.isAndroid = navigator.userAgent.match(/Android/i) ? true: false;
@@ -13,6 +15,7 @@ function myAppCtrl($rootScope,$timeout,$cookies){
     $rootScope.isiPhone = navigator.userAgent.match(/iPhone/i) ? true: false;
     $rootScope.isWindows = navigator.userAgent.match(/IEMobile/i) ? true: false;
     $rootScope.autoSetMessageBoxHeight = autoSetMessageBoxHeight;
+    $rootScope.errorDialog = errorDialog;
 
     getSysVersion();//获取系统版本
 
@@ -25,43 +28,6 @@ function myAppCtrl($rootScope,$timeout,$cookies){
     $(window).resize(function(){
         autoSetMessageBoxHeight();
     })
-
-
-    $rootScope.pageClass = 'page';
-    //判断 用户登录
-    $rootScope.$on('$routeChangeStart', function(evt, next, current) {
-
-        var user_secret = $cookies.get('user_login_cookie');
-        //下一个页面的控制器
-        var ctrl_name = next.$$route?next.$$route.controller:'';
-        //当前页面的路径
-        var curr_path = '';
-        if(angular.isDefined(current)&&angular.isDefined(current.$$route)){
-            curr_path = current.$$route.originalPath;
-        }else{
-            curr_path = '/login'
-        }
-
-        //第一优先 判断token
-        //if(angular.isUndefined(user_secret)){
-        //    $location.path('/login');
-        //    return;
-        //}else{
-        //    if(ctrl_name == 'LoginCtrl'){
-        //        $location.path('/');
-        //        return;
-        //    }
-        //}
-
-
-        //刷新页面进来的
-        if(angular.isUndefined(current)) {
-
-        }else{
-
-        }
-    })
-////////////////////////////////////
 
     function autoSetMessageBoxHeight(){
         var el = $("#message_box");
@@ -96,8 +62,18 @@ function myAppCtrl($rootScope,$timeout,$cookies){
         }
     }
 
+    function errorDialog(msg){
+        $scope.error_msg = msg;
+        $mdDialog.show({
+            clickOutsideToClose: true,
+            scope: $scope,
+            preserveScope: true,
+            template: ErrorDialogHtml,
+            controller:ErrorDialogCtrl
+        });
+    }
 }
 
-myAppCtrl.$inject = ['$rootScope','$timeout','$cookies'];
+myAppCtrl.$inject = ['$rootScope','$timeout','$mdDialog','$scope'];
 
 export default myAppCtrl;

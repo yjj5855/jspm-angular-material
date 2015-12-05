@@ -1,4 +1,4 @@
-<md-toolbar class="md-accent" ng-if="showTopToolBar">
+<md-toolbar class="md-accent" ng-if="showTopToolBar" style="position: fixed;top: 0;">
     <div class="md-toolbar-tools">
         <md-button class="md-icon-button" cm-back-btn aria-label="返回">
             <md-icon class="mdi mdi-24px mdi-arrow-left"></md-icon>
@@ -12,49 +12,50 @@
         </md-button>
     </div>
 </md-toolbar>
-<div class="cm-toolbar bg-gray" style="height: 56px;position: relative;overflow: hidden;" id="cm-header" ng-if="showTopTitle">
+<div class="cm-toolbar bg-gray" style="height: 56px;position: relative;overflow: hidden;" id="cm-header" ng-if="!showTopToolBar">
     <p class="tc top-text">
         车知了,用车问题即时解答</p>
     <p class="tc top-text" style="padding-top: 5px;">
         <span>在线时间 08:00-24:00</span>
     </p>
 </div>
-<md-content layout="column">
-    <md-content flex md-scroll-y class="bg-gray"  id="message_box">
-        <div class="tc c-gray cm-padding" ng-click="loadHistoryMsg()" ng-if="page > 0 && !is_loading_history">点击获取聊天记录</div>
-        <div class="tc c-gray cm-padding" ng-if="page == 0">没有聊天记录了</div>
+<div class="bg-gray" id="">
+    <div class="tc c-gray cm-padding" ng-click="loadHistoryMsg()" ng-if="page > 0 && !is_loading_history">点击获取聊天记录</div>
+    <div class="tc c-gray cm-padding" ng-if="page == 0">没有聊天记录了</div>
 
-        <div flex class="direct-chat-messages direct-chat-success">
-            <div ng-repeat="msg in msg_list">
-                    <!-- 客服的气泡-->
-                    <div class="direct-chat-msg" ng-if="msg.from == 1 && msg.type <= 3">
-                        <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
-                        </div>
+    <div flex class="direct-chat-messages direct-chat-success">
+        <div ng-repeat="msg in msg_list">
+            <!-- 客服的气泡-->
+            <div class="direct-chat-msg" ng-if="msg.from == 1 && msg.type <= 3">
+                <div class="direct-chat-info clearfix" >
+                    <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
+                </div>
 
-                        <img class="direct-chat-img" ng-src="{{service_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text" ng-click="preview(msg.content,msg.type,$event)" ng-bind-html="msg.content|format_msg:msg.type">
+                <img class="direct-chat-img" ng-src="{{service_info.avatar}}" alt="message user image">
+                <div class="direct-chat-text" ng-click="preview(msg.content,msg.type)" ng-bind-html="msg.content|format_msg:msg.type">
 
-                        </div>
-                    </div>
+                </div>
+            </div>
 
-                    <!-- 用户的气泡-->
-                    <div class="direct-chat-msg right" ng-if="msg.from == 0 && msg.type <= 3">
-                        <div class="direct-chat-info clearfix" >
-                            <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
-                        </div>
-                        <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
-                        <div class="direct-chat-text" ng-click="preview(msg.content,msg.type,$event)" ng-bind-html="msg.content|format_msg:msg.type">
+            <!-- 用户的气泡-->
+            <div class="direct-chat-msg right" ng-if="msg.from == 0 && msg.type <= 3">
+                <div class="direct-chat-info clearfix" >
+                    <span class="direct-chat-timestamp" >{{msg.created_at|format_date}}</span>
+                </div>
+                <img class="direct-chat-img" ng-src="{{user_info.avatar}}" alt="message user image">
+                <div class="direct-chat-text" ng-click="preview(msg.content,msg.type)" ng-bind-html="msg.content|format_msg:msg.type">
 
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
+    </div>
 
-    </md-content>
+</div>
+<div layout="column" style="position: fixed;bottom:0;width: 100%;">
+
 
     <!-- 底部输入框-->
-    <md-content layout="row" class="cm-bottom-toolbar bg-gray" style="height: 49px;overflow-y: hidden;">
+    <md-content layout="row" class="cm-bottom-toolbar bg-gray" style="height: 49px;width: 100%;overflow-y: hidden;">
 
         <!-- 语音按钮-->
         <!--<cm-audio-btn ng-model="open_audio_status">-->
@@ -76,9 +77,9 @@
         </md-button>
 
         <!--聊天输入框-->
-        <div class="cm-padding inline" flex style="padding-left: 0;padding-right: 0;" ng-show="open_audio_status == false">
-            <input class="cm-input chat-input inline border-0" type="text" id="message_input"
-                   ng-model="message.content"  ng-focus="focusMessageInput()" flex="100"
+        <div class="cm-padding inline" style="padding-left: 0;padding-right: 0;width: 100%!important;">
+            <input class="cm-input chat-input inline border-0" type="text" id="message_input" style="width: 100%;"
+                   ng-model="message.content"  ng-focus="toggleFace(false)"
                    ng-keypress="keypressInChatInput($event)" aria-label="聊天文字">
         </div>
 
@@ -99,7 +100,7 @@
     <face class="h-200" ng-show="open_face_status==true">
 
     </face>
-</md-content>
+</div>
 
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
     <md-toolbar class="md-accent">

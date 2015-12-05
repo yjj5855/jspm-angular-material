@@ -8,8 +8,6 @@ import SendOtherMessageHtml from './bottom_sheet/send-other-message-template.htm
 import SendOtherMessageCtrl from './bottom_sheet/send-other-message-controller';
 import ImgDialogCtrl from './dialog/img-dialog-controller';
 import ImgDialogHtml from './dialog/img-dialog-template.html!text';
-import ErrorDialogCtrl from './dialog/error-dialog-controller';
-import ErrorDialogHtml from './dialog/error-dialog-template.html!text'
 
 import 'source/filter/format-message'
 
@@ -19,29 +17,33 @@ import 'source/components/btn_back/btn-back-directive'
 
 export default angular.module('chat')
     .controller('SendOtherMessageCtrl',SendOtherMessageCtrl)
-    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$filter','User','socket','$mdToast','$mdDialog',
-        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log,$filter,UserService,socketService,$mdToast,$mdDialog){
-
-            $rootScope.pageClass = 'page';
-            $scope.showTopToolBar = true;
-            $scope.is_loading_history = true;
+    .controller('ChatCtrl',['$rootScope','$scope','$timeout','$window','chat.value','$mdSidenav','$mdUtil','$mdBottomSheet','$log','$filter','User','socket','$mdToast','$mdDialog','$location',
+        function($rootScope,$scope,$timeout,$window,value,$mdSidenav,$mdUtil,$mdBottomSheet,$log,$filter,UserService,socketService,$mdToast,$mdDialog,$location){
+            $scope.pageClass = 'chatpage';
+            $scope.showTopToolBar = value.showTopToolBar;
+            $scope.showTopTitle = value.showTopTitle;
+            $scope.is_loading_history = value.is_loading_history;
             $scope.error_msg = '服务器错误!';
             $scope.open_face_status = value.open_face_status;
             $scope.open_audio_status = value.open_audio_status;
+            $scope.scroll_top = value.scroll_top;
             $scope.message = value.message;
             $scope.msg_list = value.msg_list;
             $scope.service_info = value.service_info;
             $scope.user_info = value.user_info;
+            $scope.userInfo = value.userInfo;
             $scope.page = value.page;
             $scope.timestamp = value.timestamp = new Date().getTime();
             $scope.toggleRight = buildToggler('right');
             $scope.toggleFace = toggleFace;
+            $scope.focusMessageInput = focusMessageInput;
             $scope.showGridBottomSheet = showGridBottomSheet;
             $scope.gotoBottom = gotoBottom;
             $scope.sendMessage = sendMessage;
             $scope.keypressInChatInput = keypressInChatInput;
             $scope.loadHistoryMsg = loadHistoryMsg;
             $scope.preview = preview;
+
             /**
              * 监听表情控件的输入表情事件
              */
@@ -113,10 +115,17 @@ export default angular.module('chat')
                     });
                 }
             });
-
             init();
+            listenScroll();
             ////////////////////////////////////////
             function init(){
+                if($rootScope.isLoginIM){
+                    $timeout(()=>{
+                        document.getElementById("message_box").scrollTop = value.scroll_top;
+                    },100);
+                    return;
+                }
+
                 $scope.system_version = getUrlVar('system_version');
                 let params = {
                     uid         :   getUrlVar('uid'),
@@ -156,7 +165,7 @@ export default angular.module('chat')
                                 //    user_id: 35757
                                 //    user_token: "k5oXXmClkQylC9ejpZxYsA=="
                                 //}
-                                $scope.userInfo = data.data;
+                                $scope.userInfo = value.userInfo = data.data;
 
                                 //获取用户信息后 登陆IM
                                 socketService.connect().then(
@@ -187,18 +196,21 @@ export default angular.module('chat')
                                         if($scope.userInfo.channel_sign == 'czl_cyw'
                                             && $rootScope.isAndroid && $rootScope.sys_version < 4.4){
                                             $scope.showMoreBtn = false;
+                                            $scope.showTopTitle = value.showTopTitle = true;
                                         }else if($scope.userInfo.channel_sign == 'czl_lechebang'){
-                                            $scope.showTopToolBar = true;
+                                            $scope.showTopToolBar = value.showTopToolBar = true;
+                                        }else if($scope.userInfo.channel_sign == 'czl_xxyh'){
+                                            $scope.showTopTitle = value.showTopTitle = true;
                                         }
                                     },
                                     function(){
                                         $rootScope.isLinkedToSocket = false;
-                                        errorDialog('连接断开!');
+                                        $rootScope.errorDialog('连接断开!');
                                         console.log('连接断开');
                                     }
                                 )
                             }else{
-                                errorDialog('服务器错误!');
+                                $rootScope.errorDialog('服务器错误!');
                             }
 
                         }
@@ -207,7 +219,7 @@ export default angular.module('chat')
 
                 }else{
                     console.log('授权失败!');
-                    errorDialog('服务器错误!');
+                    $rootScope.errorDialog('服务器错误!');
                     //获取用户信息后 登陆IM
                     //socketService.connect().then(
                     //    function(){
@@ -257,13 +269,19 @@ export default angular.module('chat')
                 }
             }
 
+            function focusMessageInput(){
+                toggleFace(false);
+                $timeout(()=>{
+                    $("#message_input").focus();
+                },100);
+            }
+
             function toggleFace(status){
                 if(angular.isUndefined(status)){
                     $scope.open_face_status = !$scope.open_face_status;
                 }else{
                     $scope.open_face_status = status;
                 }
-                console.log($scope.open_face_status);
                 var el = $("#message_box");
                 if($scope.open_face_status){
                     $(el[0]).css('height',$rootScope.winheight-$rootScope.header-$rootScope.topToolbar-$rootScope.bottom-200+'px');
@@ -330,6 +348,10 @@ export default angular.module('chat')
              * @param type
              */
             function showGridBottomSheet($event,type){
+                if(!$rootScope.isLoginIM){
+                    pop('连接已断开,请重新进入页面!');
+                    return;
+                }
                 if(angular.isDefined($scope.system_version)){
                     let version = $scope.system_version.split('_');
                     if(angular.isUndefined(version[1]) || version[0] == 'android' && parseFloat(version[1]) < 4.4){
@@ -357,7 +379,7 @@ export default angular.module('chat')
              */
             function sendMessage(message,type){
                 if(!$rootScope.isLinkedToSocket){
-                    alert('连接已断开,请重新进入页面!');
+                    pop('连接已断开,请重新进入页面!');
                     return;
                 }
 
@@ -391,7 +413,7 @@ export default angular.module('chat')
                     user_id : $scope.userInfo.user_id,
                     alpha_id : $scope.userInfo.alpha_id
                 };
-                $scope.is_loading_history = true;
+                $scope.is_loading_history = value.is_loading_history = true;
                 return new Promise(function(){
                     UserService.getHistoryMsg(prams).$promise.then(
                         function(data){
@@ -409,11 +431,11 @@ export default angular.module('chat')
                                 }
                             }
                             value.page++;
-                            $scope.is_loading_history = false;
+                            $scope.is_loading_history = value.is_loading_history = false;
                         }
                     ).catch(function(){
                         console.log("获取聊天记录失败");
-                        $scope.is_loading_history = false;
+                        $scope.is_loading_history = value.is_loading_history = false;
                     });
                 })
 
@@ -423,16 +445,17 @@ export default angular.module('chat')
              * 浏览图片
              * @param url
              */
-            function preview(url,type){
+            function preview(url,type,$event){
                 if(type == 3){
-                    $scope.preview_url = url;
-                    $mdDialog.show({
-                        clickOutsideToClose: true,
-                        scope: $scope,        // use parent scope in template
-                        preserveScope: true,
-                        template: ImgDialogHtml,
-                        controller:ImgDialogCtrl
-                    });
+                    $rootScope.preview_url = url;
+                    //$mdDialog.show({
+                    //    clickOutsideToClose: true,
+                    //    scope: $scope,        // use parent scope in template
+                    //    preserveScope: true,
+                    //    template: ImgDialogHtml,
+                    //    controller:ImgDialogCtrl
+                    //});
+                    $location.path('preview');
                 }
             }
             /**
@@ -472,15 +495,13 @@ export default angular.module('chat')
                 );
             }
 
-            function errorDialog(msg){
-                $scope.error_msg = msg;
-                $mdDialog.show({
-                    clickOutsideToClose: false,
-                    scope: $scope,
-                    preserveScope: true,
-                    template: ErrorDialogHtml,
-                    controller:ErrorDialogCtrl
-                });
+            /**
+             * 监听滚动条位置
+             */
+            function listenScroll(){
+                $("#message_box").scroll(function(event){
+                    value.scroll_top = document.getElementById("message_box").scrollTop;
+                })
             }
 
     }])

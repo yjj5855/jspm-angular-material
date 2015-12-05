@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en"  ng-app="myApp" class="no-js">
+<html lang="zh-cmn-Hans"  ng-app="myApp" class="no-js">
 <head>
     <meta charset="UTF-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
     <title>车知了-在线问答</title>
-    <meta name="description" content="">
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="keywords" content="车知了,汽车问答,汽车保养,汽车维修,用车问题,">
+    <meta name="description" content="全国首家汽车问题在线问答平台">
+
+    <link rel="shortcut icon" type="image/ico" href="http://7te93u.com2.z0.glb.qiniucdn.com/chemi.ico"/>
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+
+    <meta name="apple-mobile-web-app-title" content="车知了-在线问答">
+    <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!-- 设置状态栏的背景颜色 -->
+    <!--<meta name="apple-mobile-web-app-status-bar-style" content="black"/>-->
+    <link rel="apple-touch-icon" href="/chat/public/img/czl_logo.jpg"/>
+    <link rel="apple-touch-startup-image" href="/chat/public/img/startup_320_480.png" />
+    <link rel="apple-touch-startup-image" sizes="640x1136" href="/chat/public/img/startup_640_1136.png" />
+    <link rel="apple-touch-startup-image" href="/chat/public/img/startup_750_1294.png" media="(device-width: 375px)">
+    <link rel="apple-touch-startup-image" href="/chat/public/img/startup_1242_2148.png" media="(device-width: 414px)">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
+
+    <!-- uc强制竖屏 -->
+    <meta name="screen-orientation" content="portrait">
+    <!-- QQ强制竖屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <!-- UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <!-- QQ强制全屏 -->
+    <meta name="x5-fullscreen" content="true">
+    <!-- UC应用模式 -->
+    <meta name="browsermode" content="application">
+    <!-- QQ应用模式 -->
+    <meta name="x5-page-mode" content="app">
+    <!-- windows phone 点击无高光 -->
+    <meta name="msapplication-tap-highlight" content="no">
 
     <script>
         <!-- 判断是否是微信打开 -->
@@ -29,7 +64,16 @@
 
 <body layout="column"  ng-controller="myAppCtrl" style="margin: 0!important;background:url('/chat/public/img/car_loading2.gif') 50% 200px no-repeat,#DADADA;">
 
-    <div class="{{channel_sign}}" ng-class="{page:pageClass == 'page',loginpage:pageClass == 'loginpage'}" layout="column" ng-view></div>
+<div class="{{channel_sign}}" layout="column" flex ng-view
+     ng-class="{page:pageClass == 'page',chatpage:pageClass == 'chatpage'}">
+
+</div>
+
+<div class="{{channel_sign}}" flex="center center" data-loading style="display: none;position: fixed;background: rgba(255,255,255,.9);border:1px solid transparent;border-radius: 15px;">
+    <md-progress-circular class="md-accent" md-diameter="60">
+
+    </md-progress-circular>
+</div>
 
 </body>
 </html>

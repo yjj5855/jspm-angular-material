@@ -1,0 +1,10 @@
+<md-button class="md-fab md-accent" cm-back-btn aria-label="返回" style="position: absolute;background: transparent!important;">
+    <md-icon class="mdi mdi-24px mdi-arrow-left"></md-icon>
+</md-button>
+
+
+<div layout="column" style="background: #000;overflow: auto!important;">
+    <div flex class="tc" id="preview_box" style="overflow: auto;">
+        <img id="preview_img" ng-src="{{preview_url}}" ng-class="{'preview-img-sm':isSamllImg}" ng-click="toggleImg()"/>
+    </div>
+</div>
